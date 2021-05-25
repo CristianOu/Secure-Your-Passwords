@@ -18,6 +18,13 @@ connection.connect(error => {
     console.log(connection.state);
 });
 
+setInterval(keepAlive, 300000);
+function keepAlive() {
+    connection.query('SELECT 1');
+    console.log("I will survive!");
+    return;
+}
+
 class DbService {
     static getDbServiceInstance() {
         return instance ? instance : new DbService();
@@ -39,7 +46,6 @@ class DbService {
             console.log(error);
         }
     }
-
 }
 
 module.exports = DbService;

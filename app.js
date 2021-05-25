@@ -29,7 +29,6 @@ app.get('/getAll', (req, res) => {
 });
 
 
-
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {
         console.log(error);
