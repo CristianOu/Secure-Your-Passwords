@@ -7,16 +7,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"));
 
-
-const mainPage = fs.readFileSync(__dirname + "/public/main-page/main-page.html", "utf-8");
+const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
+const mainPage = fs.readFileSync(__dirname + "/public/main-page/main-page.html", "utf-8");
+const footer = fs.readFileSync(__dirname + "/public/footer/footer.html", "utf-8");
 
+// UI Calls
 app.get('/', (req, res) => {
-    res.send(sideBar + mainPage);
+    res.send(header + sideBar + mainPage + footer);
 }); 
 
 
-// read
+// API Calls
 app.get('/getAll', (req, res) => {
     const db = dbService.getDbServiceInstance();
     
@@ -25,7 +27,6 @@ app.get('/getAll', (req, res) => {
         res.json({data: data});
     });
 });
-
 
 
 
