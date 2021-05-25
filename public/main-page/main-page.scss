@@ -9,6 +9,18 @@
         justify-content: space-around;
         align-items: center;
 
+
+        .account-title {
+            display: flex;
+            align-items: center;
+
+            .account-icon {
+                margin-right: 10px;
+                width: 50px;
+            }
+        }
+        
+
         .account-username, .account-password {
             display: flex;
         }

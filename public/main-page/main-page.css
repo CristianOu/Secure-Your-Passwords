@@ -23,6 +23,20 @@
           align-items: center;
 }
 
+#account-list .account-box .account-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#account-list .account-box .account-title .account-icon {
+  margin-right: 10px;
+  width: 50px;
+}
+
 #account-list .account-box .account-username, #account-list .account-box .account-password {
   display: -webkit-box;
   display: -ms-flexbox;

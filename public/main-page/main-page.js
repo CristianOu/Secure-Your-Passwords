@@ -8,7 +8,7 @@
         let output = `
             <div id="${index}" class="account-box">
                 <div class="account-title"> 
-                    <img class="account-icon" src="${account.logo}" alt="account-icon"/>
+                    <img class="account-icon" src="${account.logo_url}" alt="account-icon"/>
                     
                     <span class="field">${account.name}</span>
                 </div>
@@ -19,7 +19,6 @@
                         *Icon*
                     </button>
                 </div>
-                
 
                 <div class="account-password"> 
                     <input type="text" class="field" value="${account.password}">
