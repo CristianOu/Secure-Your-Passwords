@@ -30,10 +30,27 @@ class DbService {
         return instance ? instance : new DbService();
     }
 
-    async getAllData() {
+    async getUsers() {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "SELECT * FROM users";
+
+                connection.query(query, (err, results) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                });
+            });
+            return response;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAccounts() {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM accounts";
 
                 connection.query(query, (err, results) => {
                     if (err) reject(new Error(err.message));

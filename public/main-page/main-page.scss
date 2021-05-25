@@ -1,4 +1,30 @@
-.title {
-    color: green;
-    border: 1px;
-}
+#account-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+    .account-box {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .account-username, .account-password {
+            display: flex;
+        }
+
+        input {
+            background: #2b2b2b;
+            color: #8d8d8d;
+            padding: 4px 10px;
+            border: 0;
+            height: 50px;
+            font-size: 16px;
+            overflow: hidden;
+            border-bottom: #2b2b2b solid 1px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            letter-spacing: 1px;
+        }
+    }
+  }

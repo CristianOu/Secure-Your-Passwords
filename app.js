@@ -19,15 +19,23 @@ app.get('/', (req, res) => {
 
 
 // API Calls
-app.get('/getAll', (req, res) => {
+app.get('/getUsers', (req, res) => {
     const db = dbService.getDbServiceInstance();
     
-    const result = db.getAllData();
+    const result = db.getUsers();
     result.then(data => {
-        res.json({data: data});
+        res.json({users: data});
     });
 });
 
+app.get('/getAccounts', (req, res) => {
+    const db = dbService.getDbServiceInstance();
+    
+    const result = db.getAccounts();
+    result.then(data => {
+        res.send({accounts: data});
+    });
+});
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {

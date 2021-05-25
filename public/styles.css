@@ -1,5 +1,8 @@
 body {
-  background-color: red;
-  font-size: 30px;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #1d1d1d;
+  color: #fff;
+  display: block;
 }
 /*# sourceMappingURL=styles.css.map */
