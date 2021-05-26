@@ -35,7 +35,7 @@
                     <button class="button-medium edit">
                         Edit
                     </button>
-                    <button class="button-medium delete">
+                    <button class="button-medium delete" onClick="displayDeleteAccount()">
                         Delete
                     </button>
                 </div>
@@ -44,3 +44,8 @@
         $("#account-list").append(output);
     });
 })();
+
+function displayDeleteAccount() {
+    document.getElementById("delete-modal").setAttribute("style", 
+        "opacity: 1; z-index: 3; transition: opacity .3s");
+}

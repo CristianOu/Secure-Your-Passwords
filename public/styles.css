@@ -3,6 +3,8 @@ body {
   font-family: 'Roboto', sans-serif;
   background: #1d1d1d;
   color: #fff;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=styles.css.map */

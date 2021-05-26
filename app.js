@@ -11,10 +11,12 @@ const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8"
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
 const mainPage = fs.readFileSync(__dirname + "/public/main-page/main-page.html", "utf-8");
 const footer = fs.readFileSync(__dirname + "/public/footer/footer.html", "utf-8");
+const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.html", "utf-8");
+const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + mainPage + footer);
+    res.send(header + sideBar + create + deleteAccount + mainPage + footer);
 }); 
 
 
@@ -36,6 +38,41 @@ app.get('/getAccounts', (req, res) => {
         res.send({accounts: data});
     });
 });
+
+//create account
+app.post('/createAccount', (req, res) => {
+    console.log("account created");
+    // console.log(req.body);
+    let daytime = new Date();
+    // console.log(daytime.getDate());
+    const newAccount = {
+        user_id: 1,
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        details: req.body.details || '',
+        logo_upload: '',
+        logo_url: '',
+    };
+
+    const db = dbService.getDbServiceInstance();
+
+    const result = db.createAccount(newAccount);
+    result.then(data => {
+        console.log(data);
+    });
+    
+});
+
+
+//delete account
+app.delete('/deleteAccount', (req, res) => {
+    console.log(req.body);
+    console.log("Delete backend");
+}); 
+
+
+
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {

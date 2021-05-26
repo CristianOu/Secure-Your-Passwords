@@ -63,6 +63,29 @@ class DbService {
             console.log(error);
         }
     }
+
+    async createAccount(newAccount) {
+        try {
+            const dateAdded = new Date();
+            const response = await new Promise((resolve, reject) => {
+                const query = "INSERT INTO accounts (user_id, name, username, " 
+                    + "password, details, last_updated, logo_upload, logo_url) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
+                connection.query(query, [newAccount.user_id, newAccount.name, newAccount.username, 
+                    newAccount.password, newAccount.details, dateAdded, 
+                    newAccount.logo_upload, newAccount.logo_url] , (error, result) =>{
+                    if(error) reject (new Error(error.message));
+                    resolve(result);
+                });
+            });
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 }
 
 module.exports = DbService;

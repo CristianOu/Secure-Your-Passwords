@@ -1,0 +1,43 @@
+<div id="create-modal">
+    <div class="modal-content">
+        <div class="modal-container">
+            Create New Account
+        </div>
+        <form 
+            action="/createAccount" 
+            method="post" 
+            onsubmit="setTimeout(function() {
+                window.location.reload();
+            }, 100);">
+            <input 
+                type="text" 
+                placeholder="Name of account" 
+                name="name" 
+                id="name-of-account" />
+            <input type="text" 
+                placeholder="Username" 
+                name="username" 
+                id="username" /> 
+            <input 
+                type="text" 
+                placeholder="Password" 
+                name="password" 
+                id="password" />
+            <textarea 
+                type="text" 
+                placeholder="Details (optional)" 
+                name="details" 
+                id="details"></textarea>
+            <input 
+                type="submit" 
+                value="Save"
+                class="submit-button"
+                onClick="window.location.href='/';"
+            />
+        </form>
+        <button onClick="hideCreateModal()">Cancel</button>
+        
+    </div>
+</div>
+
+<script src="../create-modal/create-modal.js"></script>
