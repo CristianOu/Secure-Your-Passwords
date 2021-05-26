@@ -67,7 +67,13 @@ app.post('/createAccount', (req, res) => {
 
 //delete account
 app.delete('/deleteAccount/:id', (req, res) => {
-    console.log("delete:", req.params.id);
+    const id = req.params.id;
+
+    const db = dbService.getDbServiceInstance();
+    const result = db.deleteAccount(id);
+    result.then(data => {
+        console.log(data);
+    });
     // res.send(req.params.id);
     // console.log("Delete backend");
 }); 

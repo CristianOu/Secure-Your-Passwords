@@ -70,11 +70,28 @@ class DbService {
             const response = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO accounts (user_id, name, username, " 
                     + "password, details, last_updated, logo_upload, logo_url) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 connection.query(query, [newAccount.user_id, newAccount.name, newAccount.username, 
                     newAccount.password, newAccount.details, dateAdded, 
                     newAccount.logo_upload, newAccount.logo_url] , (error, result) =>{
+                    if(error) reject (new Error(error.message));
+                    resolve(result);
+                });
+            });
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteAccount(id) {
+        let account_id = Number(id);
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "DELETE FROM accounts WHERE accounts.id = ?";
+
+                connection.query(query, account_id, (error, result) => {
                     if(error) reject (new Error(error.message));
                     resolve(result);
                 });
