@@ -2,11 +2,11 @@
     const response = await fetch("/getAccounts");
     const result = await response.json();
 
-    result.accounts.map((account, index) => {
+    result.accounts.map((account) => {
         let convertedDate = new moment(account.last_updated).format('MMMM Do YYYY, h:mm:ss a');
 
         let output = `
-            <div id="${index}" class="account-box">
+            <div id="${account.id}" class="account-box">
                 <div class="account-title"> 
                     <img class="account-icon" src="${account.logo_url}" alt="account-icon"/>
                     
@@ -35,7 +35,7 @@
                     <button class="button-medium edit">
                         Edit
                     </button>
-                    <button class="button-medium delete" onClick="displayDeleteAccount()">
+                    <button data-id="${account.id}" class="delete">
                         Delete
                     </button>
                 </div>
@@ -45,7 +45,3 @@
     });
 })();
 
-function displayDeleteAccount() {
-    document.getElementById("delete-modal").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .3s");
-}

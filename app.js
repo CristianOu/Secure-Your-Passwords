@@ -66,9 +66,10 @@ app.post('/createAccount', (req, res) => {
 
 
 //delete account
-app.delete('/deleteAccount', (req, res) => {
-    console.log(req.body);
-    console.log("Delete backend");
+app.delete('/deleteAccount/:id', (req, res) => {
+    console.log("delete:", req.params.id);
+    // res.send(req.params.id);
+    // console.log("Delete backend");
 }); 
 
 
