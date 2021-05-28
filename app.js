@@ -14,6 +14,7 @@ const footer = fs.readFileSync(__dirname + "/public/footer/footer.html", "utf-8"
 const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.html", "utf-8");
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 
+
 // UI Calls
 app.get('/', (req, res) => {
     res.send(header + sideBar + create + deleteAccount + mainPage + footer);
@@ -41,10 +42,6 @@ app.get('/getAccounts', (req, res) => {
 
 //create account
 app.post('/createAccount', (req, res) => {
-    console.log("account created");
-    // console.log(req.body);
-    let daytime = new Date();
-    // console.log(daytime.getDate());
     const newAccount = {
         user_id: 1,
         name: req.body.name,
@@ -54,13 +51,19 @@ app.post('/createAccount', (req, res) => {
         logo_upload: '',
         logo_url: '',
     };
+    console.log(newAccount);
 
     const db = dbService.getDbServiceInstance();
 
     const result = db.createAccount(newAccount);
-    result.then(data => {
-        console.log(data);
+    
+    result.then(id => {
+        res.send({id}); 
+    })
+    .catch(err => {
+        console.log(err);
     });
+    
     
 });
 

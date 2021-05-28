@@ -4,13 +4,21 @@ $(document).on("click", '.delete', function(){
     // console.log(id);
     $('#delRef').attr('data-id', id);
     displayDeleteAccount();
-});
+}); // maybe moved into main-page.js cause the delete class is there
 
 // call the backend
 function deleteAccount(id) { 
     $('#' + id).remove();
     hideDeleteModal();
-    axios.delete('/deleteAccount/' + id);
+    const result = axios.delete('/deleteAccount/' + id);
+    
+    console.log("before");
+    result.then(data => {
+        console.log(data);
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 function hideDeleteModal() {

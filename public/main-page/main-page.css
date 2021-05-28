@@ -57,4 +57,18 @@
           box-sizing: border-box;
   letter-spacing: 1px;
 }
+
+#success-box {
+  opacity: 0;
+  z-index: -3;
+  visibility: hidden;
+  background-color: green;
+  position: fixed;
+  top: 20vh;
+  left: 50vw;
+  overflow: auto;
+  padding: 100px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
 /*# sourceMappingURL=main-page.css.map */
