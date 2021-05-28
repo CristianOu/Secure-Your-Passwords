@@ -11,8 +11,7 @@ function deleteAccount(id) {
     $('#' + id).remove();
     hideDeleteModal();
     const result = axios.delete('/deleteAccount/' + id);
-    
-    console.log("before");
+
     result.then(data => {
         console.log(data);
     })

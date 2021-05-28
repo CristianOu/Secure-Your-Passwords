@@ -64,6 +64,24 @@ class DbService {
         }
     }
 
+    async getAccount(id) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM accounts WHERE id=" + id;
+
+                connection.query(query, (err, result) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(result);
+                });
+            });
+            return response;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     async createAccount(newAccount) {
         try {
             const date = new Date();
@@ -73,8 +91,8 @@ class DbService {
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 connection.query(query, [newAccount.user_id, newAccount.name, newAccount.username, 
-                newAccount.password, newAccount.details, date, 
-                newAccount.logo_upload, newAccount.logo_url] , (error, result) => {
+                    newAccount.password, newAccount.details, date, 
+                    newAccount.logo_upload, newAccount.logo_url] , (error, result) => {
                     if(error) reject (new Error(error.message));
                     resolve(result.insertId); // insertId is keyword for the last inserted ID
                 });
@@ -98,6 +116,28 @@ class DbService {
                 });
             });
             return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateAccount(updatedAccount) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "UPDATE accounts SET " +
+                 "name = ?, username = ?, password = ?, details = ?, last_updated = ?, " +
+                 "logo_upload = ?, logo_url = ? " +
+                 "WHERE accounts.id = ?";
+
+                connection.query(query, [updatedAccount.name, updatedAccount.username, 
+                updatedAccount.password, updatedAccount.details, updatedAccount.last_updated,
+                updatedAccount.logo_upload, updatedAccount.logo_url, updatedAccount.id], (error, result) => {
+                    if(error) reject (new Error(error.message));
+                    resolve(result);
+                });
+            });
+            return response;
+            
         } catch (error) {
             console.log(error);
         }

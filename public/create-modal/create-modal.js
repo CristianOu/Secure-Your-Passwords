@@ -1,13 +1,16 @@
 // console.log("Create-modal");
+function displayCreateModal() {
+    document.getElementById("create-modal").setAttribute("style", 
+        "opacity: 1; z-index: 3; transition: opacity .3s");
+}
 
 function hideCreateModal() {
 
-    let obj = document.getElementById('create-modal').setAttribute("style", 
+    document.getElementById('create-modal').setAttribute("style", 
         "opacity: 0; z-index: -3;");
-    // console.log("cancel-modal");
 }
 
-function submitHandler() {
+function submitCreateHandler() {
     event.preventDefault();
 
     const newAccount = {
@@ -18,7 +21,7 @@ function submitHandler() {
         logo_upload: '',
         logo_url: '',
     };
-    const request = axios.post('createAccount', newAccount);
+    const request = axios.post('/createAccount', newAccount);
     request.then(result => {
         const convertedDate = new moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
 
@@ -49,7 +52,7 @@ function submitHandler() {
             </div>
 
             <div class="button-group">
-                <button class="button-medium edit">
+                <button data-id="${result.data.id}" class="button-medium edit" onclick="displayEditModal('${result.data.password}')">
                     Edit
                 </button>
                 <button data-id="${result.data.id}" class="delete">

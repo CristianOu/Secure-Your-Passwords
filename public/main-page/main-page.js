@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button class="button-medium edit">
+                    <button data-id="${account.id}" class="edit" onclick="displayEditModal('${account.password}')">
                         Edit
                     </button>
                     <button data-id="${account.id}" class="delete">

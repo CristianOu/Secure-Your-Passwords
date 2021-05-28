@@ -13,11 +13,11 @@ const mainPage = fs.readFileSync(__dirname + "/public/main-page/main-page.html",
 const footer = fs.readFileSync(__dirname + "/public/footer/footer.html", "utf-8");
 const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.html", "utf-8");
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
-
+const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + create + deleteAccount + mainPage + footer);
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + footer);
 }); 
 
 
@@ -28,7 +28,23 @@ app.get('/getUsers', (req, res) => {
     const result = db.getUsers();
     result.then(data => {
         res.json({users: data});
-    });
+    })
+    .catch(err => {
+        console.log(err);
+    });;
+});
+
+app.get('/getOneUser/:id', (req, res) => {
+    const db = dbService.getDbServiceInstance();
+
+    const result = db.getAccount(req.params.id);
+    result.then(data => {
+        res.json({account: data});
+    })
+    .catch(err => {
+        console.log(err);
+    });;
+
 });
 
 app.get('/getAccounts', (req, res) => {
@@ -37,7 +53,10 @@ app.get('/getAccounts', (req, res) => {
     const result = db.getAccounts();
     result.then(data => {
         res.send({accounts: data});
-    });
+    })
+    .catch(err => {
+        console.log(err);
+    });;
 });
 
 //create account
@@ -67,6 +86,36 @@ app.post('/createAccount', (req, res) => {
     
 });
 
+
+app.patch('/editAccount', (req, res) => {
+    if (req.body.updatedPassword) {
+        updatedAccount.last_updated = new Date();
+    }
+    const updatedAccount = {
+        id: req.body.id,
+        user_id: 1,
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        details: req.body.details || '',
+        logo_upload: '',
+        logo_url: '',
+        last_updated: req.body.last_updated
+    };
+
+    console.log(updatedAccount);
+
+    const db = dbService.getDbServiceInstance();
+
+    const result = db.updateAccount(updatedAccount);
+    result.then(data => {
+        res.json({account: data});
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+});
 
 //delete account
 app.delete('/deleteAccount/:id', (req, res) => {
