@@ -62,35 +62,18 @@ function submitCreateHandler() {
         </div>`;
 
         $('#account-list').append(newAccountHTML);
-    });
-    
-    // reset values after Save
-    $('#name-of-account').val("");
-    $('#username').val("");
-    $('#password').val("");
-    $('#details').val("");
 
-    hideCreateModal();
-    displaySuccessfullyCreatedModal();
-    setTimeout(() => {
-        hideDisplaySuccessfullyCreated();
-    }, 2000);
-    
-}
+        // reset values after Save
+        $('#name-of-account').val("");
+        $('#username').val("");
+        $('#password').val("");
+        $('#details').val("");
 
-function displaySuccessfullyCreatedModal() {
-    $('#success-box').css( {
-        "opacity": "1",
-        "z-index": "3",
-        "visibility": "visible",  
-        "transition": "opacity .3s"
-    });
-}
+        hideCreateModal();
 
-function hideDisplaySuccessfullyCreated() {
-    $('#success-box').css( {
-        "visibility": "hidden", 
-        "opacity": "0", 
-        "transition": " visibility .3s, opacity .3s"
+        displayNotificationModal("The account has been successfully added!");
+        setTimeout(() => {
+            hideNotification();
+        }, 2000);
     });
 }

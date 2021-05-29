@@ -9,15 +9,18 @@ $(document).on("click", '.delete', function(){
 // call the backend
 function deleteAccount(id) { 
     $('#' + id).remove();
-    hideDeleteModal();
-    const result = axios.delete('/deleteAccount/' + id);
-
-    result.then(data => {
-        console.log(data);
-    })
-    .catch(err => {
-        console.log(err);
+    const response = axios.delete('/deleteAccount/' + id);
+    response.then(() => {
+        hideDeleteModal();
+    
+        displayNotificationModal("The account has been successfully deleted");
+        setTimeout(() => {
+            hideNotification();
+        }, 2000);
     });
+    
+    
+    
 }
 
 function hideDeleteModal() {

@@ -14,10 +14,11 @@ const footer = fs.readFileSync(__dirname + "/public/footer/footer.html", "utf-8"
 const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.html", "utf-8");
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
+const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + footer);
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
 }); 
 
 
@@ -103,13 +104,13 @@ app.patch('/editAccount', (req, res) => {
         last_updated: req.body.last_updated
     };
 
-    console.log(updatedAccount);
+    // console.log(updatedAccount);
 
     const db = dbService.getDbServiceInstance();
 
     const result = db.updateAccount(updatedAccount);
     result.then(data => {
-        res.json({account: data});
+        res.json(data);
     })
     .catch(err => {
         console.log(err);
@@ -124,7 +125,7 @@ app.delete('/deleteAccount/:id', (req, res) => {
     const db = dbService.getDbServiceInstance();
     const result = db.deleteAccount(id);
     result.then(data => {
-        console.log(data);
+        res.json({data});
     });
     // res.send(req.params.id);
     // console.log("Delete backend");

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EACd,OAAO,EAAE,CAAC;EACV,OAAO,EAAE,EAAE;EACX,UAAU,EAAE,MAAM;EAClB,gBAAgB,EAAE,KAAK;EACvB,QAAQ,EAAE,KAAK;EACf,GAAG,EAAE,IAAI;EACT,IAAI,EAAE,IAAI;EACV,QAAQ,EAAE,IAAI;EACd,OAAO,EAAE,KAAK;EACd,SAAS,EAAE,gBAAgB;CAC9B",
+    "sources": [
+        "notification-modal.scss"
+    ],
+    "names": [],
+    "file": "notification-modal.css"
+}

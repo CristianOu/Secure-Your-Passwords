@@ -46,7 +46,19 @@ function submitEditHandler() {
     };
 
     const request = axios.patch('/editAccount', updatedAccount);
-    request.then(result => {
-        console.log(result);
+    request.then(() => {
+
+        //edit the fields in the UI
+        $("#" + accountId + " .account-title .field").text( $('#edit-name-of-account').val() );
+        $("#" + accountId + " .account-username .field").val( $('#edit-username').val() );
+        $("#" + accountId + " .account-password .field").val( $('#edit-password').val() );
+
+        hideEditModal();
+        displayNotificationModal("The account has been successfully edited!");
+        setTimeout(() => {
+            hideNotification();
+        }, 2000);
     });
+
+    
 }
