@@ -21,10 +21,14 @@
                 </div>
 
                 <div class="account-password"> 
-                    <input type="text" class="field" value="${account.password}">
+                    <input type="password" readonly class="field" value="${account.password}">
                     <button class="button-small copy">
-                        *Icon*
+                        Copy Pass
                     </button>
+                    <button class="button-small copy" >
+                        <i class="fas fa-eye" onClick=showPassword(${account.id})></i>
+                    </button>
+                    
                 </div>
 
                 <div class="last-updated"> 
@@ -45,3 +49,7 @@
     });
 })();
 
+function showPassword(accountId) {
+    
+    $("#" + accountId + " .account-password input").attr('type', 'text');
+}

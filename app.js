@@ -2,9 +2,11 @@ const express = require('express');
 const dbService = require('./database');
 const fs = require("fs");
 const app = express();
+const bcrypt = require("bcrypt");
+const { encrypt, decrypt } = require('./crypto');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
@@ -61,7 +63,12 @@ app.get('/getAccounts', (req, res) => {
 });
 
 //create account
-app.post('/createAccount', (req, res) => {
+app.post('/createAccount', async (req, res) => {
+    const cryptoPassword = encrypt(req.body.password);
+    console.log(cryptoPassword);
+    const text = decrypt(cryptoPassword);
+    console.log(text);
+
     const newAccount = {
         user_id: 1,
         name: req.body.name,
@@ -83,8 +90,6 @@ app.post('/createAccount', (req, res) => {
     .catch(err => {
         console.log(err);
     });
-    
-    
 });
 
 
@@ -127,8 +132,6 @@ app.delete('/deleteAccount/:id', (req, res) => {
     result.then(data => {
         res.json({data});
     });
-    // res.send(req.params.id);
-    // console.log("Delete backend");
 }); 
 
 
