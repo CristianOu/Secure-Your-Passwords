@@ -1,7 +1,7 @@
 (async function getProjects() {
-    const response = await fetch("/getAccounts");
-    const result = await response.json();
-
+    const response = await axios.get("/accounts");
+    const result = response.data;
+    
     result.accounts.map((account) => {
         let convertedDate = new moment(account.last_updated).format('MMMM Do YYYY, h:mm:ss a');
 
@@ -23,10 +23,10 @@
                 <div class="account-password"> 
                     <input type="password" readonly class="field" value="${account.password}">
                     <button class="button-small copy">
-                        Copy Pass
+                        <i class="far fa-clipboard" onClick="copyText(${account.id})"></i>
                     </button>
-                    <button class="button-small copy" >
-                        <i class="fas fa-eye" onClick=showPassword(${account.id})></i>
+                    <button class="button-small watch" >
+                        <i class="fas fa-eye" onClick="revealPassword(${account.id}, ${true})"></i>
                     </button>
                     
                 </div>
@@ -49,7 +49,26 @@
     });
 })();
 
-function showPassword(accountId) {
-    
-    $("#" + accountId + " .account-password input").attr('type', 'text');
+function revealPassword(accountId, show) {
+    if (show) {
+        $("#" + accountId + " .account-password input").attr('type', 'text');
+        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-eye-slash');
+        $("#" + accountId + " .account-password .watch i").attr('onclick', 
+            'revealPassword(' + accountId +','+ false +')');
+    } else {
+        $("#" + accountId + " .account-password input").attr('type', 'password');
+        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-eye');
+        $("#" + accountId + " .account-password .watch i").attr('onclick', 
+            'revealPassword(' + accountId +','+ true +')');
+    }
+    // console.log(show)
 }
+
+function copyText(accountId) {
+    // const text = $("#" + accountId + " .account-password input");
+    // console.log(text)
+    // text.select();
+    // text.setSelectionRange(0, 9999);
+    // document.execCommand("copy");
+    // alert("Copied the text: " + text.value);
+} 

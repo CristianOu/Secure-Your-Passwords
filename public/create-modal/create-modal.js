@@ -21,7 +21,7 @@ function submitCreateHandler() {
         logo_upload: '',
         logo_url: '',
     };
-    const request = axios.post('/createAccount', newAccount);
+    const request = axios.post('/account', newAccount);
     request.then(result => {
         const convertedDate = new moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
 
@@ -52,7 +52,7 @@ function submitCreateHandler() {
             </div>
 
             <div class="button-group">
-                <button data-id="${result.data.id}" class="button-medium edit" onclick="displayEditModal('${result.data.password}')">
+                <button data-id="${result.data.id}" class="button-medium edit" onclick="displayEditModal('${newAccount.password}')">
                     Edit
                 </button>
                 <button data-id="${result.data.id}" class="delete">

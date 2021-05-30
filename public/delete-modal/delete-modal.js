@@ -9,7 +9,7 @@ $(document).on("click", '.delete', function(){
 // call the backend
 function deleteAccount(id) { 
     $('#' + id).remove();
-    const response = axios.delete('/deleteAccount/' + id);
+    const response = axios.delete('/account/' + id);
     response.then(() => {
         hideDeleteModal();
     
