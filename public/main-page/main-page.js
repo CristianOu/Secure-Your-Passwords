@@ -15,18 +15,21 @@
 
                 <div class="account-username"> 
                     <input type="text" class="field" readonly value="${account.username}" />
-                    <button class="button-small copy">
-                        *Icon*
+                    <button class="button-small copy" onClick="copyText(${account.id}, 'account-username')" >
+                        <i class="far fa-2x fa-copy"></i>
+                        <div class="tooltip">Copied!</div>
                     </button>
                 </div>
 
                 <div class="account-password"> 
                     <input type="password" readonly class="field" value="${account.password}">
-                    <button class="button-small copy">
-                        <i class="far fa-clipboard" onClick="copyText(${account.id})"></i>
+                    <button class="button-small copy" onClick="copyText(${account.id}, 'account-password')" >
+                        <i class="far fa-2x fa-copy"></i>
+                        <div class="tooltip">Copied!</div>
                     </button>
-                    <button class="button-small watch" >
-                        <i class="fas fa-eye" onClick="revealPassword(${account.id}, ${true})"></i>
+                    
+                    <button class="button-small watch" onClick="revealPassword(${account.id}, ${true})" >
+                        <i class="far fa-2x fa-eye" ></i>
                     </button>
                     
                 </div>
@@ -52,23 +55,35 @@
 function revealPassword(accountId, show) {
     if (show) {
         $("#" + accountId + " .account-password input").attr('type', 'text');
-        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-eye-slash');
-        $("#" + accountId + " .account-password .watch i").attr('onclick', 
+        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-2x fa-eye-slash');
+        $("#" + accountId + " .account-password .watch").attr('onclick', 
             'revealPassword(' + accountId +','+ false +')');
     } else {
         $("#" + accountId + " .account-password input").attr('type', 'password');
-        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-eye');
-        $("#" + accountId + " .account-password .watch i").attr('onclick', 
+        $("#" + accountId + " .account-password .watch i").attr('class', 'far fa-2x fa-eye');
+        $("#" + accountId + " .account-password .watch").attr('onclick', 
             'revealPassword(' + accountId +','+ true +')');
     }
     // console.log(show)
 }
 
-function copyText(accountId) {
-    // const text = $("#" + accountId + " .account-password input");
-    // console.log(text)
-    // text.select();
-    // text.setSelectionRange(0, 9999);
-    // document.execCommand("copy");
-    // alert("Copied the text: " + text.value);
+function copyText(accountId, field) {
+    console.log(field)
+    const element = $("#" + accountId + " ." + field + " input");
+    const tooltip = $("#" + accountId + " ." + field + " button .tooltip");
+
+    let $temp = $("<input>");
+    $("body").append($temp);
+
+    $temp.val(element.val()).select();
+    if (document.execCommand("copy")) {
+        tooltip.css({"opacity": "1"});
+
+        setTimeout(function() {
+            tooltip.css({"opacity": "0"});
+        }, 1000);
+    } else {
+        alert("Something went wrong! Refresh the page!");
+    }
+    $temp.remove();
 } 
