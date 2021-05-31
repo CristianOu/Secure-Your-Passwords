@@ -1,13 +1,16 @@
 const express = require('express');
-const dbService = require('./database');
-const fs = require("fs");
 const app = express();
+
+const fs = require("fs");
 const bcrypt = require("bcrypt");
+const http = require("http").createServer(app);
+
+const dbService = require('./database');
 const { encrypt, decrypt } = require('./crypto');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static( "public"));
 
 const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
@@ -17,10 +20,11 @@ const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.ht
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
 const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
+const liveChat = fs.readFileSync(__dirname + "/public/live-chat/live-chat.html", "utf-8");
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + liveChat + footer);
 }); 
 
 
