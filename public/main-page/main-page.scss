@@ -26,8 +26,8 @@
         }
 
         input {
-            background: #cecece;
-            color: #201f1f;
+            background: #535353;
+            color: #ffffff;
             padding: 4px  10px;
             border: none;
             height: 50px;
@@ -48,6 +48,7 @@
     text-transform: uppercase;
     z-index: -3;
     opacity: 0;
+    color:rgb(43, 180, 30);
 }
 
 .account-password input {
@@ -56,9 +57,9 @@
 
 .account-password .copy, .watch, .account-username .copy {
     margin: 0;
-    padding: 0 5px;
+    padding: 7px 5px 0 5px;
     border: none;
-    background: #cecece;
+    background: #535353;
     opacity: .9;
     transition: opacity .1s;
     &:hover {
@@ -74,4 +75,8 @@
 .account-password .watch {
     margin-right: 40px;
     padding: 0 10px;
+} 
+
+i {
+    color: rgb(255, 255, 255);
 }

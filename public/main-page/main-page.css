@@ -44,8 +44,8 @@
 }
 
 #account-list .account-box input {
-  background: #cecece;
-  color: #201f1f;
+  background: #535353;
+  color: #ffffff;
   padding: 4px  10px;
   border: none;
   height: 50px;
@@ -63,6 +63,7 @@
   text-transform: uppercase;
   z-index: -3;
   opacity: 0;
+  color: #2bb41e;
 }
 
 .account-password input {
@@ -71,9 +72,9 @@
 
 .account-password .copy, .watch, .account-username .copy {
   margin: 0;
-  padding: 0 5px;
+  padding: 7px 5px 0 5px;
   border: none;
-  background: #cecece;
+  background: #535353;
   opacity: .9;
   -webkit-transition: opacity .1s;
   transition: opacity .1s;
@@ -92,5 +93,9 @@
 .account-password .watch {
   margin-right: 40px;
   padding: 0 10px;
+}
+
+i {
+  color: white;
 }
 /*# sourceMappingURL=main-page.css.map */

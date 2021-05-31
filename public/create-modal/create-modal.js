@@ -35,15 +35,20 @@ function submitCreateHandler() {
 
             <div class="account-username"> 
                 <input type="text" class="field" readonly value="${newAccount.username}" />
-                <button class="button-small copy">
-                    *Icon*
+                <button class="button-small copy" onClick="copyText(${result.data.id}, 'account-username')" >
+                    <i class="far fa-2x fa-copy"></i>
+                    <div class="tooltip">Copied!</div>
                 </button>
             </div>
 
             <div class="account-password"> 
-                <input type="text" class="field" value="${newAccount.password}">
-                <button class="button-small copy">
-                    *Icon*
+                <input type="password" class="field" value="${newAccount.password}">
+                <button class="button-small copy" onClick="copyText(${result.data.id}, 'account-password')" >
+                    <i class="far fa-2x fa-copy"></i>
+                    <div class="tooltip">Copied!</div>
+                </button>
+                <button class="button-small watch" onClick="revealPassword(${result.data.id}, ${true})" >
+                    <i class="far fa-2x fa-eye" ></i>
                 </button>
             </div>
 

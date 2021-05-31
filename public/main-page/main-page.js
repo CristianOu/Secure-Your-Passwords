@@ -27,7 +27,6 @@
                         <i class="far fa-2x fa-copy"></i>
                         <div class="tooltip">Copied!</div>
                     </button>
-                    
                     <button class="button-small watch" onClick="revealPassword(${account.id}, ${true})" >
                         <i class="far fa-2x fa-eye" ></i>
                     </button>
