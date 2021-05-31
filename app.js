@@ -5,9 +5,17 @@ const app = express();
 const bcrypt = require("bcrypt");
 const { encrypt, decrypt } = require('./crypto');
 
+// CSRF Protection 
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
+
+const csrfMiddleware = csrf({ cookie: true });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cookieParser());
+app.use(csrfMiddleware);
 
 const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
@@ -17,11 +25,22 @@ const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.ht
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
 const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
+const login = fs.readFileSync(__dirname + "/public/login/login.html", "utf-8");
+
+// Prerequisite for every http request (checking cookies)
+app.all("*", (req, res, next) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    next();
+})
 
 // UI Calls
 app.get('/', (req, res) => {
     res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
 }); 
+
+app.get('/login', (req, res) => {
+    res.send(header + login + footer);
+});
 
 
 // API Calls
@@ -47,7 +66,6 @@ app.get('/getOneUser/:id', (req, res) => {
     .catch(err => {
         console.log(err);
     });;
-
 });
 
 app.get('/getAccounts', (req, res) => {

@@ -1,0 +1,29 @@
+<div id="login-page">
+    <form method="POST" action="/login" id="login-form">
+        <ul>
+            <li class="input">
+                <input type="email" name="email" placeholder="" class="input-field" required>
+                <label class="label">Email</label>
+                <span class="focus-border"></span>
+            </li>
+    
+            <li class="input">
+                <input type="password" name="password" placeholder="" class="input-field">
+                <label class="label">Password</label>
+                <span class="focus-border"></span>
+            </li>
+        </ul>
+    
+        <button id="submit-button" type="submit">
+            <span class="background"></span>
+            <span class="border"></span>
+            <span class="text">Log In</span>
+        </button>
+    </form>
+</div>
+
+
+<script src="../login/login.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js" defer></script>

@@ -7,4 +7,12 @@ body {
   display: -ms-flexbox;
   display: flex;
 }
+
+:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
 /*# sourceMappingURL=styles.css.map */
