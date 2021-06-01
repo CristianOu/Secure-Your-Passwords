@@ -1,39 +1,24 @@
-<button class="live-chat-btn">Open Chat</button>
+<button class="live-chat-btn" onclick="openChat()">Open Chat</button>
 
-<div class="live-chat-box">
+<div id="live-chat-box">
     <div class="chat-header">
         <div class="logo">
             <i class="fab fa-facebook-messenger"></i>
             <h3>What's your question?</h3>
         </div>
         <p id="name">Your Name</p>
+        <p id='close-btn' onclick="closeChat()">X</p>
     </div>
     <div class="chat-section">
         <div class="main-wrapper">
             <div class="chat-content">
                 <div class="message">
                     <div class="message-row other-message">
-                        <div class="message-title">
-                            👻<span>Developer</span>
-                        </div>
-                        <div class="message-text">
-                            Hello
-                        </div> 
-                        <div class="message-time">
-                            April 20
-                        </div>
+                        
                     </div>
 
                     <div class="message-row your-message">
-                        <div class="message-title">
-                            👻<span>User</span>
-                        </div>
-                        <div class="message-text">
-                            Hi
-                        </div> 
-                        <div class="message-time">
-                            April 20
-                        </div>
+                        
                     </div>
                 </div>
             </div>

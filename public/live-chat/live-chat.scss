@@ -9,7 +9,7 @@
     left: 90vw;
 }
 
-.live-chat-box {
+#live-chat-box {
     position: absolute;
     display: block;
     top: 60vh;
@@ -22,6 +22,8 @@
     border: 1px solid black;
     background: rgba(207, 201, 201, 0.842);
     color: black;
+    opacity: 0;
+    z-index: -3;
 }
 
 .chat-header {
@@ -158,4 +160,8 @@
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+#name {
+    width: 10px;
 }

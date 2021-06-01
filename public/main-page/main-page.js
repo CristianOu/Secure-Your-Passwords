@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="account-username"> 
-                    <input type="text" class="field" readonly value="${account.username}" />
+                    <input type="text" class="field" disabled value="${account.username}" />
                     <button class="button-small copy" onClick="copyText(${account.id}, 'account-username')" >
                         <i class="far fa-2x fa-copy"></i>
                         <div class="tooltip">Copied!</div>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="account-password"> 
-                    <input type="password" readonly class="field" value="${account.password}">
+                    <input type="password" disabled class="field" value="${account.password}">
                     <button class="button-small copy" onClick="copyText(${account.id}, 'account-password')" >
                         <i class="far fa-2x fa-copy"></i>
                         <div class="tooltip">Copied!</div>

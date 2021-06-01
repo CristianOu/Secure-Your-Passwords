@@ -4,6 +4,7 @@ const app = express();
 
 let server = http.createServer(app);
 const io = require('socket.io')(server);
+const cookie = require("cookie");
 
 const dbService = require('./database');
 const admin = require('firebase-admin');
@@ -23,6 +24,7 @@ admin.initializeApp({
 // CSRF Protection 
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+const { Cookie } = require('cookies');
 const csrfMiddleware = csrf({ cookie: true });
 
 app.use(express.json());
@@ -214,7 +216,7 @@ app.post('/account', checkCookieMiddleware, async (req, res) => {
     // console.log(decrypt(cryptoPassword));
 
     const newAccount = {
-        user_id: 1,
+        user_id: req.decodedClaims.uid,
         name: req.body.name,
         username: req.body.username,
         password_iv: cryptedPassword.iv,
@@ -284,10 +286,23 @@ app.delete('/account/:id', checkCookieMiddleware, (req, res) => {
 //live chat
 
 io.on('connection', socket => {
-    console.log('socket-connected');
+    const cookies = socket.handshake.headers.cookie; 
+    const sessionCookie = cookie.parse(cookies).session;
+    let username = '';
 
-    socket.on('sendMessage', msg => {
-        console.log(msg);
+    admin
+        .auth()
+        .verifySessionCookie(sessionCookie, true)
+        .then((decodedClaims) => {
+            username = decodedClaims.name;
+        })
+        .catch((error) => {
+            // res.redirect('/login');
+            console.log("Unauthorized Request!");
+        })
+
+    socket.on('sendMessage', msg =>  {
+        socket.broadcast.emit('sendToAll', {msg, username});
     });
 
     socket.on("disconnect", () => {
