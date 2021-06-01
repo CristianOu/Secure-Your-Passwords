@@ -4,7 +4,7 @@ $(document).on("click", '.edit', function(){
     // event.preventDefault();
     accountId = $(this).attr('data-id');
     
-    const result = axios.get('/getOneUser/' + accountId);
+    const result = axios.get('/account/' + accountId);
     result.then(response => {
         $("#edit-name-of-account").val(response.data.account[0].name);
         $("#edit-username").val(response.data.account[0].username);
@@ -22,16 +22,22 @@ function hideEditModal() {
 let oldPassword = "";
 function displayEditModal(password) {
     oldPassword = password;
+    console.log(oldPassword);
     document.getElementById("edit-backdrop").setAttribute("style", 
         "opacity: 1; z-index: 3; transition: opacity .3s");
 }
 
 function submitEditHandler() {
+    isPasswordChanged = false;
     event.preventDefault();
+    console.log(oldPassword + '\n' + $('#edit-password').val())
     if (oldPassword !== $('#edit-password').val()) {
         lastUpdated = new Date();
+        oldPassword = $('#edit-password').val();
+        isPasswordChanged = true;
     } 
     convertedDate = new moment(lastUpdated).format('YYYY-MM-DD HH:mm:ss');
+    console.log(oldPassword)
     
     const updatedAccount = {
         
@@ -42,17 +48,25 @@ function submitEditHandler() {
         details: $('#edit-details').val() || '',
         logo_upload: '',
         logo_url: '',
-        last_updated: convertedDate
+        last_updated: convertedDate,
+        isPasswordChanged: isPasswordChanged
     };
 
-    const request = axios.patch('/editAccount', updatedAccount);
+    const request = axios.patch('/account', updatedAccount);
     request.then(() => {
 
         //edit the fields in the UI
-        $("#" + accountId + " .account-title .field").text( $('#edit-name-of-account').val() );
-        $("#" + accountId + " .account-username .field").val( $('#edit-username').val() );
-        $("#" + accountId + " .account-password .field").val( $('#edit-password').val() );
+        $("#" + accountId + " .account-title .field").text( updatedAccount.name );
+        $("#" + accountId + " .account-username .field").val( updatedAccount.username );
+        $("#" + accountId + " .account-password .field").val( updatedAccount.password );
 
+        let convertedDate = new moment(updatedAccount.last_updated).format('MMMM Do YYYY, h:mm:ss a');
+        $("#" + accountId + " .last-updated .field").text( convertedDate );
+
+        //updates the reference of the displayEditModal
+        $("#" + accountId + " .button-group .edit").attr("onclick", "displayEditModal('" + updatedAccount.password + "')");
+
+        // location.reload();
         hideEditModal();
         displayNotificationModal("The account has been successfully edited!");
         setTimeout(() => {

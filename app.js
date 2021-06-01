@@ -1,13 +1,19 @@
 const express = require('express');
-const dbService = require('./database');
-const fs = require("fs");
+const http = require('http');
 const app = express();
-const bcrypt = require("bcrypt");
+
+const fs = require("fs");
+// const bcrypt = require("bcrypt");
+let server = http.createServer(app);
+const io = require('socket.io')(server);
+// const escapeHtml = require("html-escaper").escape;
+
+const dbService = require('./database');
 const { encrypt, decrypt } = require('./crypto');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static( "public"));
 
 const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
@@ -17,15 +23,16 @@ const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.ht
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
 const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
+const liveChat = fs.readFileSync(__dirname + "/public/live-chat/live-chat.html", "utf-8");
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + liveChat + footer);
 }); 
 
 
 // API Calls
-app.get('/getUsers', (req, res) => {
+app.get('/users', (req, res) => {
     const db = dbService.getDbServiceInstance();
     
     const result = db.getUsers();
@@ -37,12 +44,31 @@ app.get('/getUsers', (req, res) => {
     });;
 });
 
-app.get('/getOneUser/:id', (req, res) => {
+app.get('/account/:id', (req, res) => {
     const db = dbService.getDbServiceInstance();
 
     const result = db.getAccount(req.params.id);
     result.then(data => {
-        res.json({account: data});
+        data = data.map(account => {
+            const encryptedPasword = {
+                iv: account.password_iv,
+                content: account.password_content
+            };
+            const decryptedPassword = decrypt(encryptedPasword);
+
+            return {
+                id: account.id,
+                user_id: account.user_id,
+                name: account.name,
+                username: account.username,
+                password: decryptedPassword,
+                details: account.details,
+                last_updated: account.last_updated,
+                logo_upload: account.logo_upload,
+                logo_url: account.logo_url
+            };
+        });
+        res.send({account: data});
     })
     .catch(err => {
         console.log(err);
@@ -50,11 +76,31 @@ app.get('/getOneUser/:id', (req, res) => {
 
 });
 
-app.get('/getAccounts', (req, res) => {
+app.get('/accounts', (req, res) => {
     const db = dbService.getDbServiceInstance();
     
-    const result = db.getAccounts();
-    result.then(data => {
+    const response = db.getAccounts();
+    response.then(data => {
+
+        data = data.map(account => {
+            const encryptedPasword = {
+                iv: account.password_iv,
+                content: account.password_content
+            };
+            const decryptedPassword = decrypt(encryptedPasword);
+
+            return {
+                id: account.id,
+                user_id: account.user_id,
+                name: account.name,
+                username: account.username,
+                password: decryptedPassword,
+                details: account.details,
+                last_updated: account.last_updated,
+                logo_upload: account.logo_upload,
+                logo_url: account.logo_url
+            };
+        });
         res.send({accounts: data});
     })
     .catch(err => {
@@ -63,22 +109,20 @@ app.get('/getAccounts', (req, res) => {
 });
 
 //create account
-app.post('/createAccount', async (req, res) => {
-    const cryptoPassword = encrypt(req.body.password);
-    console.log(cryptoPassword);
-    const text = decrypt(cryptoPassword);
-    console.log(text);
+app.post('/account', async (req, res) => {
+    const cryptedPassword = encrypt(req.body.password);
+    // console.log(decrypt(cryptoPassword));
 
     const newAccount = {
         user_id: 1,
         name: req.body.name,
         username: req.body.username,
-        password: req.body.password,
+        password_iv: cryptedPassword.iv,
+        password_content: cryptedPassword.content,
         details: req.body.details || '',
         logo_upload: '',
         logo_url: '',
     };
-    console.log(newAccount);
 
     const db = dbService.getDbServiceInstance();
 
@@ -93,23 +137,25 @@ app.post('/createAccount', async (req, res) => {
 });
 
 
-app.patch('/editAccount', (req, res) => {
-    if (req.body.updatedPassword) {
-        updatedAccount.last_updated = new Date();
+app.patch('/account', (req, res) => {
+    let encryptedPassword = '';
+    if (req.body.isPasswordChanged) {
+        encryptedPassword = encrypt(req.body.password)
     }
+    
     const updatedAccount = {
         id: req.body.id,
         user_id: 1,
         name: req.body.name,
         username: req.body.username,
-        password: req.body.password,
+        password_iv: encryptedPassword.iv,
+        password_content: encryptedPassword.content,
         details: req.body.details || '',
         logo_upload: '',
         logo_url: '',
-        last_updated: req.body.last_updated
+        last_updated: req.body.last_updated,
+        isPasswordChanged: req.body.isPasswordChanged
     };
-
-    // console.log(updatedAccount);
 
     const db = dbService.getDbServiceInstance();
 
@@ -124,7 +170,7 @@ app.patch('/editAccount', (req, res) => {
 });
 
 //delete account
-app.delete('/deleteAccount/:id', (req, res) => {
+app.delete('/account/:id', (req, res) => {
     const id = req.params.id;
 
     const db = dbService.getDbServiceInstance();
@@ -135,11 +181,25 @@ app.delete('/deleteAccount/:id', (req, res) => {
 }); 
 
 
+//live chat
+
+io.on('connection', socket => {
+    console.log('socket-connected');
+
+    socket.on('sendMessage', msg => {
+        console.log(msg);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("socket disconnected")
+    });
+});
 
 
-const server = app.listen(process.env.PORT || 8080, (error) => {
+
+server.listen(process.env.PORT, (error) => {
     if (error) {
         console.log(error);
     }
-    console.log("App listening on localhost :", server.address().port);
+    console.log("App listening on localhost :", process.env.PORT);
 });

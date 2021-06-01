@@ -15,7 +15,7 @@ connection.connect(error => {
         return console.log('error' + error.message);
     }
 
-    console.log(connection.state);
+    console.log('Database:', connection.state);
 });
 
 setInterval(keepAlive, 300000);
@@ -87,11 +87,11 @@ class DbService {
             const date = new Date();
             const insertId = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO accounts (user_id, name, username, " 
-                    + "password, details, last_updated, logo_upload, logo_url) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "password_iv, password_content, details, last_updated, logo_upload, logo_url) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 connection.query(query, [newAccount.user_id, newAccount.name, newAccount.username, 
-                    newAccount.password, newAccount.details, date, 
+                    newAccount.password_iv, newAccount.password_content, newAccount.details, date, 
                     newAccount.logo_upload, newAccount.logo_url] , (error, result) => {
                     if(error) reject (new Error(error.message));
                     resolve(result.insertId); // insertId is keyword for the last inserted ID
@@ -123,21 +123,39 @@ class DbService {
 
     async updateAccount(updatedAccount) {
         try {
-            const response = await new Promise((resolve, reject) => {
-                const query = "UPDATE accounts SET " +
-                 "name = ?, username = ?, password = ?, details = ?, last_updated = ?, " +
-                 "logo_upload = ?, logo_url = ? " +
-                 "WHERE accounts.id = ?";
+            if (updatedAccount.isPasswordChanged) {
 
-                connection.query(query, [updatedAccount.name, updatedAccount.username, 
-                updatedAccount.password, updatedAccount.details, updatedAccount.last_updated,
-                updatedAccount.logo_upload, updatedAccount.logo_url, updatedAccount.id], (error, result) => {
-                    if(error) reject (new Error(error.message));
-                    resolve(result);
+                const response = await new Promise((resolve, reject) => {
+                    const query = "UPDATE accounts SET " +
+                        "name = ?, username = ?, password_iv = ?, password_content = ?, details = ?," +
+                        "last_updated = ?, logo_upload = ?, logo_url = ? " +
+                        "WHERE accounts.id = ?";
+    
+                    connection.query(query, [updatedAccount.name, updatedAccount.username, updatedAccount.password_iv, 
+                        updatedAccount.password_content, updatedAccount.details, updatedAccount.last_updated, 
+                        updatedAccount.logo_upload, updatedAccount.logo_url, updatedAccount.id], (error, result) => {
+                        if(error) reject (new Error(error.message));
+                        resolve(result);
+                    });
                 });
-            });
-            return response;
-            
+                return response;
+
+            } else {
+                const response = await new Promise((resolve, reject) => {
+                    const query = "UPDATE accounts SET " +
+                     "name = ?, username = ?, details = ?, last_updated = ?, " +
+                     "logo_upload = ?, logo_url = ? " +
+                     "WHERE accounts.id = ?";
+    
+                    connection.query(query, [updatedAccount.name, updatedAccount.username, 
+                    updatedAccount.details, updatedAccount.last_updated, updatedAccount.logo_upload, 
+                    updatedAccount.logo_url, updatedAccount.id], (error, result) => {
+                        if(error) reject (new Error(error.message));
+                        resolve(result);
+                    });
+                });
+                return response;
+            }
         } catch (error) {
             console.log(error);
         }

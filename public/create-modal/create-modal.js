@@ -21,7 +21,7 @@ function submitCreateHandler() {
         logo_upload: '',
         logo_url: '',
     };
-    const request = axios.post('/createAccount', newAccount);
+    const request = axios.post('/account', newAccount);
     request.then(result => {
         const convertedDate = new moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
 
@@ -35,15 +35,20 @@ function submitCreateHandler() {
 
             <div class="account-username"> 
                 <input type="text" class="field" readonly value="${newAccount.username}" />
-                <button class="button-small copy">
-                    *Icon*
+                <button class="button-small copy" onClick="copyText(${result.data.id}, 'account-username')" >
+                    <i class="far fa-2x fa-copy"></i>
+                    <div class="tooltip">Copied!</div>
                 </button>
             </div>
 
             <div class="account-password"> 
-                <input type="text" class="field" value="${newAccount.password}">
-                <button class="button-small copy">
-                    *Icon*
+                <input type="password" class="field" value="${newAccount.password}">
+                <button class="button-small copy" onClick="copyText(${result.data.id}, 'account-password')" >
+                    <i class="far fa-2x fa-copy"></i>
+                    <div class="tooltip">Copied!</div>
+                </button>
+                <button class="button-small watch" onClick="revealPassword(${result.data.id}, ${true})" >
+                    <i class="far fa-2x fa-eye" ></i>
                 </button>
             </div>
 
@@ -52,7 +57,7 @@ function submitCreateHandler() {
             </div>
 
             <div class="button-group">
-                <button data-id="${result.data.id}" class="button-medium edit" onclick="displayEditModal('${result.data.password}')">
+                <button data-id="${result.data.id}" class="button-medium edit" onclick="displayEditModal('${newAccount.password}')">
                     Edit
                 </button>
                 <button data-id="${result.data.id}" class="delete">
