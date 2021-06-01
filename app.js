@@ -1,9 +1,12 @@
 const express = require('express');
+const http = require('http');
 const app = express();
 
 const fs = require("fs");
-const bcrypt = require("bcrypt");
-const http = require("http").createServer(app);
+// const bcrypt = require("bcrypt");
+let server = http.createServer(app);
+const io = require('socket.io')(server);
+// const escapeHtml = require("html-escaper").escape;
 
 const dbService = require('./database');
 const { encrypt, decrypt } = require('./crypto');
@@ -179,16 +182,24 @@ app.delete('/account/:id', (req, res) => {
 
 
 //live chat
-const io = require('socket.io')(http);
-io.on('connection', socket=> {
-    console.log('Connected');
+
+io.on('connection', socket => {
+    console.log('socket-connected');
+
+    socket.on('sendMessage', msg => {
+        console.log(msg);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("socket disconnected")
+    });
 });
 
 
 
-const server = app.listen(process.env.PORT || 8080, (error) => {
+server.listen(process.env.PORT, (error) => {
     if (error) {
         console.log(error);
     }
-    console.log("App listening on localhost :", server.address().port);
+    console.log("App listening on localhost :", process.env.PORT);
 });

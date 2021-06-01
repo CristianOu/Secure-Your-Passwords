@@ -15,7 +15,7 @@ connection.connect(error => {
         return console.log('error' + error.message);
     }
 
-    console.log(connection.state);
+    console.log('Database:', connection.state);
 });
 
 setInterval(keepAlive, 300000);
