@@ -67,10 +67,11 @@ app.post('/login', (req, res) => {
 app.post('/register', checkCookieMiddleware, (req, res) => {    // This happens right when you're logged in, post registration
     const uid = req.decodedClaims.uid;
     const email = req.decodedClaims.email;
+    const username = req.decodedClaims.name;
 
     const newUser = {
         uid: uid,
-        username: '',
+        username: username,
         email: email
     };
 
@@ -112,6 +113,7 @@ function checkCookieMiddleware(req, res, next) {
 
 // UI Calls
 app.get('/', checkCookieMiddleware, (req, res) => {
+    console.log("name " + req.decodedClaims.name);
     res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
 }); 
 
