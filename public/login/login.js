@@ -10,6 +10,29 @@ $(".label").on('click', function() {
     $(this).prev().focus();
 });
 
+let loginForm = $('#login-form');
+let registerForm = $('#register-form');
+let toggle = $('#btn');
+
+let loginButton = $('.toggle-btn.login');
+let registerButton = $('.toggle-btn.register');
+
+function register() {
+    loginForm.css('left', '-450px');
+    registerForm.css('left', '0');
+    toggle.css('left', '110px');
+    loginButton.css('color', 'white');
+    registerButton.css('color', 'black');
+}
+
+function login() {
+    loginForm.css('left', '0');
+    registerForm.css('left', '450px');
+    toggle.css('left', '0');
+    loginButton.css('color', 'black');
+    registerButton.css('color', 'white');
+}
+
 $(document).ready(function() {
     const firebaseConfig = {
         apiKey: "AIzaSyD7-tfxQ9oJ1NDjdQ1VbQINGQp9BKq_AuY",
