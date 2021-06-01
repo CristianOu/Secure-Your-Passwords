@@ -1,4 +1,14 @@
-#account-list {
+#main-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#main-page #account-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,7 +21,7 @@
           justify-content: center;
 }
 
-#account-list .account-box {
+#main-page #account-list .account-box {
   margin-top: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,7 +33,7 @@
           align-items: center;
 }
 
-#account-list .account-box .account-title {
+#main-page #account-list .account-box .account-title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,22 +42,22 @@
           align-items: center;
 }
 
-#account-list .account-box .account-title .account-icon {
+#main-page #account-list .account-box .account-title .account-icon {
   margin-right: 10px;
   width: 50px;
 }
 
-#account-list .account-box .account-username, #account-list .account-box .account-password {
+#main-page #account-list .account-box .account-username, #main-page #account-list .account-box .account-password {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#account-list .account-box input {
-  background: #535353;
-  color: #ffffff;
-  padding: 4px  10px;
-  border: none;
+#main-page #account-list .account-box input {
+  background: #2b2b2b;
+  color: #8d8d8d;
+  padding: 4px 10px;
+  border: 0;
   height: 50px;
   font-size: 16px;
   overflow: hidden;

@@ -9,11 +9,30 @@ const io = require('socket.io')(server);
 // const escapeHtml = require("html-escaper").escape;
 
 const dbService = require('./database');
+const admin = require('firebase-admin');
+const fs = require("fs");
+const app = express();
+const bcrypt = require("bcrypt");
 const { encrypt, decrypt } = require('./crypto');
+
+// Firebase Admin
+const serviceAccountKey = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: "https://your-passwords-9900c-default-rtdb.europe-west1.firebasedatabase.app"
+});
+
+// CSRF Protection 
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
+const csrfMiddleware = csrf({ cookie: true });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static( "public"));
+app.use(express.static("public"));
+app.use(cookieParser());
+app.use(csrfMiddleware);
 
 const header = fs.readFileSync(__dirname + "/public/header/header.html", "utf-8");
 const sideBar = fs.readFileSync(__dirname + "/public/side-bar/side-bar.html", "utf-8");
@@ -23,16 +42,101 @@ const create = fs.readFileSync(__dirname + "/public/create-modal/create-modal.ht
 const deleteAccount = fs.readFileSync(__dirname + "/public/delete-modal/delete-modal.html", "utf-8");
 const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "utf-8");
 const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
+const login = fs.readFileSync(__dirname + "/public/login/login.html", "utf-8");
 const liveChat = fs.readFileSync(__dirname + "/public/live-chat/live-chat.html", "utf-8");
 
+// Prerequisite for every http request (cookie setup to prevent CSRF)
+app.all("*", (req, res, next) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    next();
+});
+
+// Authentication
+app.post('/login', (req, res) => {
+    const idToken = req.body.token.toString();
+
+    // 1 hour
+    const expiresIn = 60 * 60 * 1000;
+
+    admin
+        .auth()
+        .createSessionCookie(idToken, { expiresIn })
+        .then(
+            (sessionCookie) => {
+            // const options = { maxAge: expiresIn, httpOnly: true }; // with expiration time
+            const options = { httpOnly: true };
+            res.cookie("session", sessionCookie, options);
+            res.end(JSON.stringify({ status: "success" }));
+            },
+            (error) => {
+            res.status(401).send("UNAUTHORIZED REQUEST!");
+            }
+        );
+});
+
+app.post('/register', checkCookieMiddleware, (req, res) => {    // This happens right when you're logged in, post registration
+    const uid = req.decodedClaims.uid;
+    const email = req.decodedClaims.email;
+    const username = req.decodedClaims.name;
+
+    const newUser = {
+        uid: uid,
+        username: username,
+        email: email
+    };
+
+    const db = dbService.getDbServiceInstance();
+
+    // Purpose is to link firebase users to the users in the mysql db (they'll both share a uid)
+    const result = db.createUser(newUser);
+    
+    result
+        .then(res => console.log(res))
+        .catch(err => {
+            console.log(err);
+        });
+    
+})
+
+app.post('/logout', (req, res) => {
+    res.clearCookie('session');
+    res.redirect('/login');
+});
+
+// Authorization
+function checkCookieMiddleware(req, res, next) {
+    const sessionCookie = req.cookies.session || "";
+
+    admin
+        .auth()
+        .verifySessionCookie(sessionCookie, true)
+        .then((decodedClaims) => {
+            req.decodedClaims = decodedClaims;
+            // Our request
+           next();
+        })
+        .catch((error) => {
+            res.redirect('/login');
+            console.log("Unauthorized Request!");
+        })
+}
+
 // UI Calls
-app.get('/', (req, res) => {
+app.get('/', checkCookieMiddleware, (req, res) => {
+    console.log("name " + req.decodedClaims.name);
     res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + liveChat + footer);
 }); 
 
+app.get('/login', (req, res) => {
+    res.send(header + login + footer);
+});
 
 // API Calls
-app.get('/users', (req, res) => {
+app.get('/getUser', checkCookieMiddleware, (req, res) => {
+    res.send(req.decodedClaims.name);
+});
+
+app.get('/getUsers', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
     
     const result = db.getUsers();
@@ -44,7 +148,7 @@ app.get('/users', (req, res) => {
     });;
 });
 
-app.get('/account/:id', (req, res) => {
+app.get('/account/:id', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
 
     const result = db.getAccount(req.params.id);
@@ -73,12 +177,11 @@ app.get('/account/:id', (req, res) => {
     .catch(err => {
         console.log(err);
     });;
-
 });
 
-app.get('/accounts', (req, res) => {
+app.get('/accounts', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
-    
+    const user = req.decodedClaims.uid; 
     const response = db.getAccounts();
     response.then(data => {
 
@@ -109,7 +212,7 @@ app.get('/accounts', (req, res) => {
 });
 
 //create account
-app.post('/account', async (req, res) => {
+app.post('/account', checkCookieMiddleware, async (req, res) => {
     const cryptedPassword = encrypt(req.body.password);
     // console.log(decrypt(cryptoPassword));
 
@@ -137,7 +240,7 @@ app.post('/account', async (req, res) => {
 });
 
 
-app.patch('/account', (req, res) => {
+app.patch('/account',  checkCookieMiddleware, (req, res) => {
     let encryptedPassword = '';
     if (req.body.isPasswordChanged) {
         encryptedPassword = encrypt(req.body.password)
@@ -170,7 +273,7 @@ app.patch('/account', (req, res) => {
 });
 
 //delete account
-app.delete('/account/:id', (req, res) => {
+app.delete('/account/:id', checkCookieMiddleware, (req, res) => {
     const id = req.params.id;
 
     const db = dbService.getDbServiceInstance();
