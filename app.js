@@ -2,16 +2,13 @@ const express = require('express');
 const http = require('http');
 const app = express();
 
-const fs = require("fs");
-// const bcrypt = require("bcrypt");
 let server = http.createServer(app);
 const io = require('socket.io')(server);
-// const escapeHtml = require("html-escaper").escape;
 
 const dbService = require('./database');
 const admin = require('firebase-admin');
 const fs = require("fs");
-const app = express();
+
 const bcrypt = require("bcrypt");
 const { encrypt, decrypt } = require('./crypto');
 
@@ -182,7 +179,7 @@ app.get('/account/:id', checkCookieMiddleware, (req, res) => {
 app.get('/accounts', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
     const user = req.decodedClaims.uid; 
-    const response = db.getAccounts();
+    const response = db.getAccounts(user);
     response.then(data => {
 
         data = data.map(account => {
