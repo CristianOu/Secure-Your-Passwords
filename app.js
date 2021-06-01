@@ -1,5 +1,6 @@
 const express = require('express');
 const dbService = require('./database');
+const admin = require('firebase-admin');
 const fs = require("fs");
 const app = express();
 const bcrypt = require("bcrypt");
@@ -8,7 +9,6 @@ const { encrypt, decrypt } = require('./crypto');
 // CSRF Protection 
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
-
 const csrfMiddleware = csrf({ cookie: true });
 
 app.use(express.json());
@@ -27,11 +27,17 @@ const edit = fs.readFileSync(__dirname + "/public/edit-modal/edit-modal.html", "
 const notification = fs.readFileSync(__dirname + "/public/notification-modal/notification-modal.html", "utf-8");
 const login = fs.readFileSync(__dirname + "/public/login/login.html", "utf-8");
 
-// Prerequisite for every http request (checking cookies)
+// Prerequisite for every http request (cookie setup to prevent CSRF)
 app.all("*", (req, res, next) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
     next();
 })
+
+// Authentication
+app.post('/login', (req, res) => {
+    console.log(req.body);
+    res.send({token: req.body});
+}) 
 
 // UI Calls
 app.get('/', (req, res) => {
@@ -41,7 +47,6 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.send(header + login + footer);
 });
-
 
 // API Calls
 app.get('/getUsers', (req, res) => {
@@ -152,8 +157,13 @@ app.delete('/deleteAccount/:id', (req, res) => {
     });
 }); 
 
+// Firebase Admin
+const serviceAccountKey = require('./serviceAccountKey.json');
 
-
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: "https://your-passwords-9900c-default-rtdb.europe-west1.firebasedatabase.app"
+});
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {
