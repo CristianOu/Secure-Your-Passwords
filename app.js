@@ -287,7 +287,8 @@ io.on('connection', socket => {
     console.log('socket-connected');
 
     socket.on('sendMessage', msg => {
-        console.log(msg);
+        // console.log(msg);
+        socket.broadcast.emit('sendToAll', msg);
     });
 
     socket.on("disconnect", () => {
