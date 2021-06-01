@@ -1,3 +1,9 @@
+(async function getUser() {
+    const response = await axios.get('/getUser');
+    $("#greeting").append(response.data || 'Guest');
+})();
+
+
 (async function getProjects() {
     const response = await fetch("/getAccounts");
     const result = await response.json();

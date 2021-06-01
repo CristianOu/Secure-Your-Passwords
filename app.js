@@ -122,6 +122,10 @@ app.get('/login', (req, res) => {
 });
 
 // API Calls
+app.get('/getUser', checkCookieMiddleware, (req, res) => {
+    res.send(req.decodedClaims.name);
+});
+
 app.get('/getUsers', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
     
