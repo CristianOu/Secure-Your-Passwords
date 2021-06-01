@@ -39,7 +39,7 @@ const login = fs.readFileSync(__dirname + "/public/login/login.html", "utf-8");
 app.all("*", (req, res, next) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
     next();
-})
+});
 
 // Authentication
 app.post('/login', (req, res) => {
@@ -62,24 +62,33 @@ app.post('/login', (req, res) => {
             res.status(401).send("UNAUTHORIZED REQUEST!");
             }
         );
-}) 
+}); 
 
-// UI Calls
-app.get('/', (req, res) => {
+app.post('/logout', (req, res) => {
+    res.clearCookie('session');
+    res.redirect('/login');
+});
+
+// Authorization
+function checkCookieMiddleware(req, res, next) {
     const sessionCookie = req.cookies.session || "";
 
     admin
         .auth()
         .verifySessionCookie(sessionCookie, true)
         .then(() => {
-            // Actual request
-            res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
-            console.log("Successfully logged in");
+            // Our request
+           next();
         })
         .catch((error) => {
             res.redirect('/login');
-            console.log("Failed to log in");
+            console.log("Unauthorized Request!");
         })
+}
+
+// UI Calls
+app.get('/', checkCookieMiddleware, (req, res) => {
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
 }); 
 
 app.get('/login', (req, res) => {
@@ -87,7 +96,7 @@ app.get('/login', (req, res) => {
 });
 
 // API Calls
-app.get('/getUsers', (req, res) => {
+app.get('/getUsers', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
     
     const result = db.getUsers();
@@ -99,7 +108,7 @@ app.get('/getUsers', (req, res) => {
     });;
 });
 
-app.get('/getOneUser/:id', (req, res) => {
+app.get('/getOneUser/:id', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
 
     const result = db.getAccount(req.params.id);
@@ -111,7 +120,7 @@ app.get('/getOneUser/:id', (req, res) => {
     });;
 });
 
-app.get('/getAccounts', (req, res) => {
+app.get('/getAccounts', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
     
     const result = db.getAccounts();
@@ -124,7 +133,7 @@ app.get('/getAccounts', (req, res) => {
 });
 
 //create account
-app.post('/createAccount', async (req, res) => {
+app.post('/createAccount', checkCookieMiddleware, async (req, res) => {
     const cryptoPassword = encrypt(req.body.password);
     console.log(cryptoPassword);
     const text = decrypt(cryptoPassword);
@@ -154,7 +163,7 @@ app.post('/createAccount', async (req, res) => {
 });
 
 
-app.patch('/editAccount', (req, res) => {
+app.patch('/editAccount', checkCookieMiddleware, (req, res) => {
     if (req.body.updatedPassword) {
         updatedAccount.last_updated = new Date();
     }
@@ -185,7 +194,7 @@ app.patch('/editAccount', (req, res) => {
 });
 
 //delete account
-app.delete('/deleteAccount/:id', (req, res) => {
+app.delete('/deleteAccount/:id', checkCookieMiddleware, (req, res) => {
     const id = req.params.id;
 
     const db = dbService.getDbServiceInstance();
