@@ -6,6 +6,14 @@ const app = express();
 const bcrypt = require("bcrypt");
 const { encrypt, decrypt } = require('./crypto');
 
+// Firebase Admin
+const serviceAccountKey = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountKey),
+    databaseURL: "https://your-passwords-9900c-default-rtdb.europe-west1.firebasedatabase.app"
+});
+
 // CSRF Protection 
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
@@ -35,13 +43,43 @@ app.all("*", (req, res, next) => {
 
 // Authentication
 app.post('/login', (req, res) => {
-    console.log(req.body);
-    res.send({token: req.body});
+    const idToken = req.body.token.toString();
+
+    // 1 hour
+    const expiresIn = 60 * 60 * 1000;
+
+    admin
+        .auth()
+        .createSessionCookie(idToken, { expiresIn })
+        .then(
+            (sessionCookie) => {
+            // const options = { maxAge: expiresIn, httpOnly: true }; // with expiration time
+            const options = { httpOnly: true };
+            res.cookie("session", sessionCookie, options);
+            res.end(JSON.stringify({ status: "success" }));
+            },
+            (error) => {
+            res.status(401).send("UNAUTHORIZED REQUEST!");
+            }
+        );
 }) 
 
 // UI Calls
 app.get('/', (req, res) => {
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
+    const sessionCookie = req.cookies.session || "";
+
+    admin
+        .auth()
+        .verifySessionCookie(sessionCookie, true)
+        .then(() => {
+            // Actual request
+            res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + footer);
+            console.log("Successfully logged in");
+        })
+        .catch((error) => {
+            res.redirect('/login');
+            console.log("Failed to log in");
+        })
 }); 
 
 app.get('/login', (req, res) => {
@@ -156,14 +194,6 @@ app.delete('/deleteAccount/:id', (req, res) => {
         res.json({data});
     });
 }); 
-
-// Firebase Admin
-const serviceAccountKey = require('./serviceAccountKey.json');
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccountKey),
-    databaseURL: "https://your-passwords-9900c-default-rtdb.europe-west1.firebasedatabase.app"
-});
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
     if (error) {

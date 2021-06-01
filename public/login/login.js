@@ -31,15 +31,45 @@ $(document).ready(function() {
 
         const email = e.target.email.value;
         const password = e.target.password.value;
-
+        
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
                 return user.getIdToken().then((idToken) => {
-                    return axios.post('/login', idToken, {
+                    return axios.post('/login', {'token': idToken}, {
                         headers: {
                             Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                        }
+                    }).then(res => console.log(res.data)).catch(console.error());
+                });
+            })
+            .then(() => {
+                return firebase.auth().signOut();
+            })
+            .then(() => {
+                window.location.assign("/");
+            });
+        return false;
+    });
+
+    $('#register-form').on('submit', function(e){
+        e.preventDefault();
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+                return user.getIdToken().then((idToken) => {
+                    return axios.post('/login', {'token': idToken}, {
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
                             "CSRF-Token": Cookies.get("XSRF-TOKEN"),
                         }
                     }).then(res => console.log(res.data));
@@ -49,10 +79,12 @@ $(document).ready(function() {
                 return firebase.auth().signOut();
             })
             .then(() => {
-                // window.location.assign("/");
+                window.location.assign("/");
             });
         return false;
     });
+
+
 });
 
 

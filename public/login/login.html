@@ -1,5 +1,5 @@
 <div id="login-page">
-    <form method="POST" action="/login" id="login-form">
+    <form method="POST" id="login-form">
         <ul>
             <li class="input">
                 <input type="email" name="email" placeholder="" class="input-field" required>
@@ -14,7 +14,29 @@
             </li>
         </ul>
     
-        <button id="submit-button" type="submit">
+        <button class="submit-button" type="submit">
+            <span class="background"></span>
+            <span class="border"></span>
+            <span class="text">Log In</span>
+        </button>
+    </form>
+
+    <form method="POST" id="register-form">
+        <ul>
+            <li class="input">
+                <input type="email" name="email" placeholder="" class="input-field" required>
+                <label class="label">Email</label>
+                <span class="focus-border"></span>
+            </li>
+    
+            <li class="input">
+                <input type="password" name="password" placeholder="" class="input-field">
+                <label class="label">Password</label>
+                <span class="focus-border"></span>
+            </li>
+        </ul>
+    
+        <button class="submit-button" type="submit">
             <span class="background"></span>
             <span class="border"></span>
             <span class="text">Log In</span>
