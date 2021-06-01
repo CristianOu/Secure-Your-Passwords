@@ -24,7 +24,7 @@
   padding: 50px;
 }
 
-form input, textarea {
+#create-form input, textarea {
   display: block;
   margin: 10px;
 }

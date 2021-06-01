@@ -178,6 +178,12 @@ app.delete('/account/:id', (req, res) => {
 }); 
 
 
+//live chat
+const io = require('socket.io')(http);
+io.on('connection', socket=> {
+    console.log('Connected');
+});
+
 
 
 const server = app.listen(process.env.PORT || 8080, (error) => {
