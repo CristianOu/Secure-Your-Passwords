@@ -20,8 +20,8 @@
   "homepage": "https://github.com/CristianOu/Secure-Your-Passwords#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cookie": "^0.4.0",
     "cookie-parser": "^1.4.5",
-    "cookies": "^0.8.0",
     "cross-env": "^7.0.3",
     "csurf": "^1.11.0",
     "dotenv": "^10.0.0",

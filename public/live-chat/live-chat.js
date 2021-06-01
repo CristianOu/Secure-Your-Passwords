@@ -23,8 +23,8 @@ $(btnSend).on('click', function(event) {
     chatBox.scrollTop(chatBox.prop('scrollHeight')); // shows the last msg every time an message is sent
 });
 
-socket.on('sendToAll', msg => {
-    display(msg, 'other-message', 'Admin');
+socket.on('sendToAll', data => {
+    display(data.msg, 'other-message', data.username);
     chatBox.scrollTop(chatBox.prop('scrollHeight'));
 });
 

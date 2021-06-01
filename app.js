@@ -4,7 +4,7 @@ const app = express();
 
 let server = http.createServer(app);
 const io = require('socket.io')(server);
-var cookie = require("cookies");
+const cookie = require("cookie");
 
 const dbService = require('./database');
 const admin = require('firebase-admin');
@@ -24,6 +24,7 @@ admin.initializeApp({
 // CSRF Protection 
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+const { Cookie } = require('cookies');
 const csrfMiddleware = csrf({ cookie: true });
 
 app.use(express.json());
@@ -285,13 +286,23 @@ app.delete('/account/:id', checkCookieMiddleware, (req, res) => {
 //live chat
 
 io.on('connection', socket => {
-    // var cookief = socket.handshake.headers.cookie; 
-    // var cookies = cookie.parse(socket.handshake.headers.cookie);
-    // console.log(cookies);
+    const cookies = socket.handshake.headers.cookie; 
+    const sessionCookie = cookie.parse(cookies).session;
+    let username = '';
+
+    admin
+        .auth()
+        .verifySessionCookie(sessionCookie, true)
+        .then((decodedClaims) => {
+            username = decodedClaims.name;
+        })
+        .catch((error) => {
+            // res.redirect('/login');
+            console.log("Unauthorized Request!");
+        })
 
     socket.on('sendMessage', msg =>  {
-        // console.log(msg);
-        socket.broadcast.emit('sendToAll', msg);
+        socket.broadcast.emit('sendToAll', {msg, username});
     });
 
     socket.on("disconnect", () => {
