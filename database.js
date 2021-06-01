@@ -47,10 +47,10 @@ class DbService {
         }
     }
 
-    async getAccounts() {
+    async getAccounts(user) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM accounts";
+                const query = "SELECT * FROM accounts WHERE user_id='" + user + "'";
 
                 connection.query(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -99,6 +99,23 @@ class DbService {
             });
             // console.log("responseId:" + insertId);
             return insertId; 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async createUser(newUser) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "INSERT INTO users (uid, username, email) "
+                    + "VALUES (?, ?, ?)";
+
+                connection.query(query, [newUser.uid, newUser.username, newUser.email], (error, result) => {
+                    if(error) reject (new Error(error.message));
+                    resolve(result); 
+                });
+            });
+            return response; 
         } catch (error) {
             console.log(error);
         }

@@ -62,7 +62,30 @@ app.post('/login', (req, res) => {
             res.status(401).send("UNAUTHORIZED REQUEST!");
             }
         );
-}); 
+});
+
+app.post('/register', checkCookieMiddleware, (req, res) => {    // This happens right when you're logged in, post registration
+    const uid = req.decodedClaims.uid;
+    const email = req.decodedClaims.email;
+
+    const newUser = {
+        uid: uid,
+        username: '',
+        email: email
+    };
+
+    const db = dbService.getDbServiceInstance();
+
+    // Purpose is to link firebase users to the users in the mysql db (they'll both share a uid)
+    const result = db.createUser(newUser);
+    
+    result
+        .then(res => console.log(res))
+        .catch(err => {
+            console.log(err);
+        });
+    
+})
 
 app.post('/logout', (req, res) => {
     res.clearCookie('session');
@@ -76,7 +99,8 @@ function checkCookieMiddleware(req, res, next) {
     admin
         .auth()
         .verifySessionCookie(sessionCookie, true)
-        .then(() => {
+        .then((decodedClaims) => {
+            req.decodedClaims = decodedClaims;
             // Our request
            next();
         })
@@ -122,8 +146,9 @@ app.get('/getOneUser/:id', checkCookieMiddleware, (req, res) => {
 
 app.get('/getAccounts', checkCookieMiddleware, (req, res) => {
     const db = dbService.getDbServiceInstance();
-    
-    const result = db.getAccounts();
+    const user = req.decodedClaims.uid; 
+
+    const result = db.getAccounts(user);
     result.then(data => {
         res.send({accounts: data});
     })

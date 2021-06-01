@@ -43,7 +43,7 @@ $(document).ready(function() {
                             "Content-Type": "application/json",
                             "CSRF-Token": Cookies.get("XSRF-TOKEN"),
                         }
-                    }).then(res => console.log(res.data)).catch(console.error());
+                    })
                 });
             })
             .then(() => {
@@ -72,11 +72,14 @@ $(document).ready(function() {
                             "Content-Type": "application/json",
                             "CSRF-Token": Cookies.get("XSRF-TOKEN"),
                         }
-                    }).then(res => console.log(res.data));
+                    })
                 });
             })
             .then(() => {
                 return firebase.auth().signOut();
+            })
+            .then(() => {
+                axios.post('/register');
             })
             .then(() => {
                 window.location.assign("/");
