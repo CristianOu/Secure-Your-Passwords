@@ -5,20 +5,27 @@ const chatBox = $('.chat-content');
 const displayMsg = $('.message');
 
 msgText.focus();
+
 $(btnSend).on('click', function(event) {
     event.preventDefault();
-    // console.log(msgText.val())
-    socket.emit('sendMessage', msgText.val());
+
+    const msg = msgText.val();
+    display(msg, 'your-message');
+    socket.emit('sendMessage', msg);
+    msgText.val('');
+    msgText.focus();
+    chatBox.scrollTop(chatBox.prop('scrollHeight')); // shows the last msg every time an message is sent
 });
 
 socket.on('sendToAll', msg => {
-    console.log(msg)
+    // console.log(msg)
     display(msg, 'other-message');
+    chatBox.scrollTop(chatBox.prop('scrollHeight'));
 });
 
 const display = (msg, className) => {
-    const msgDiv = $.create("div");
-    msgDiv.addClass(className, 'message-row');
+    const msgDiv = $('<div></div>');
+    msgDiv.addClass(className + ' message-row');
 
     const time = new Date().toLocaleTimeString();
     const innerText = `
@@ -35,6 +42,16 @@ const display = (msg, className) => {
         </div>
     `;
 
-    
-    displayMsg.append(innerText);
+    msgDiv.html(innerText);
+    displayMsg.append(msgDiv);
 };
+
+function closeChat() {
+    document.getElementById("live-chat-box").setAttribute("style", 
+        "opacity: 0; z-index: -3; transition: opacity .3s");
+}
+
+function openChat() {
+    document.getElementById("live-chat-box").setAttribute("style", 
+        "opacity: 1; z-index: 3; transition: opacity .3s");
+}

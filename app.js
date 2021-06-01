@@ -214,7 +214,7 @@ app.post('/account', checkCookieMiddleware, async (req, res) => {
     // console.log(decrypt(cryptoPassword));
 
     const newAccount = {
-        user_id: 1,
+        user_id: req.decodedClaims.uid,
         name: req.body.name,
         username: req.body.username,
         password_iv: cryptedPassword.iv,
@@ -286,7 +286,7 @@ app.delete('/account/:id', checkCookieMiddleware, (req, res) => {
 io.on('connection', socket => {
     console.log('socket-connected');
 
-    socket.on('sendMessage', msg => {
+    socket.on('sendMessage', msg =>  {
         // console.log(msg);
         socket.broadcast.emit('sendToAll', msg);
     });
