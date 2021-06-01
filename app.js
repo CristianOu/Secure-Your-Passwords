@@ -4,6 +4,7 @@ const app = express();
 
 let server = http.createServer(app);
 const io = require('socket.io')(server);
+var cookie = require("cookies");
 
 const dbService = require('./database');
 const admin = require('firebase-admin');
@@ -284,7 +285,9 @@ app.delete('/account/:id', checkCookieMiddleware, (req, res) => {
 //live chat
 
 io.on('connection', socket => {
-    console.log('socket-connected');
+    // var cookief = socket.handshake.headers.cookie; 
+    // var cookies = cookie.parse(socket.handshake.headers.cookie);
+    // console.log(cookies);
 
     socket.on('sendMessage', msg =>  {
         // console.log(msg);

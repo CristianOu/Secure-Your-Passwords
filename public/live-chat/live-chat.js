@@ -4,13 +4,19 @@ const btnSend = $('#btn-send');
 const chatBox = $('.chat-content');
 const displayMsg = $('.message');
 
+let username = '';
+axios.get('/getUser')
+.then(result => {
+    username = result.data;
+});
+
 msgText.focus();
 
 $(btnSend).on('click', function(event) {
     event.preventDefault();
 
     const msg = msgText.val();
-    display(msg, 'your-message');
+    display(msg, 'your-message', username);
     socket.emit('sendMessage', msg);
     msgText.val('');
     msgText.focus();
@@ -18,19 +24,18 @@ $(btnSend).on('click', function(event) {
 });
 
 socket.on('sendToAll', msg => {
-    // console.log(msg)
-    display(msg, 'other-message');
+    display(msg, 'other-message', 'Admin');
     chatBox.scrollTop(chatBox.prop('scrollHeight'));
 });
 
-const display = (msg, className) => {
+const display = (msg, className, user) => {
     const msgDiv = $('<div></div>');
     msgDiv.addClass(className + ' message-row');
 
     const time = new Date().toLocaleTimeString();
     const innerText = `
         <div class="message-title">
-        👻<span>User</span>
+        👻<span>${user}</span>
         </div>
 
         <div class="message-text">
