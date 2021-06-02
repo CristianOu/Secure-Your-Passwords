@@ -168,8 +168,8 @@
 }
 
 #main-page #account-list .account-box .button-group button {
-  background: -webkit-gradient(linear, left top, right top, from(#ffd35b), to(#ffcb5b));
-  background: linear-gradient(to right, #ffd35b, #ffcb5b);
+  background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
+  background: linear-gradient(to right, #fcb243, #ffcb5b);
   font-size: 14px;
   letter-spacing: 2px;
   font-family: "Open Sans", sans-serif;

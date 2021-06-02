@@ -1,6 +1,7 @@
 #side-bar {
-  background-color: #ffd35b;
-  color: #1d1d1d;
+  background: -webkit-gradient(linear, left bottom, right top, from(#fcb243), to(#ffcb5b));
+  background: linear-gradient(to right top, #fcb243, #ffcb5b);
+  color: #242424;
   width: 15rem;
   padding: 1.5rem 0;
   display: -webkit-box;
