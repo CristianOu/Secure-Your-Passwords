@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
 
+    #headings {
+        display: flex;
+        justify-content: space-between;
+    }
+
     #account-list {
         display: flex;
         flex-direction: column;
@@ -12,11 +17,17 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            height: 100px;
+            box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.589);
+            border-radius: 1rem;
+            padding: .75rem;
+            overflow: hidden;
     
     
             .account-title {
                 display: flex;
                 align-items: center;
+                width: 200px;
     
                 .account-icon {
                     margin-right: 10px;
@@ -27,6 +38,10 @@
     
             .account-username, .account-password {
                 display: flex;
+            }
+
+            .last-updated {
+                width: 300px;
             }
     
             input {

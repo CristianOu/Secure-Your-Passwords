@@ -24,6 +24,10 @@
     color: black;
     opacity: 0;
     z-index: -3;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .chat-header {
@@ -156,10 +160,6 @@
 
 .msg-text button i {
     color: #1f6868;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 #name {

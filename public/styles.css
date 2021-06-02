@@ -7,6 +7,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 :focus {
@@ -32,5 +33,11 @@ a {
 
 .app-box .content {
   padding: 1.5rem;
+  overflow-y: scroll;
+  width: 84%;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 /*# sourceMappingURL=styles.css.map */

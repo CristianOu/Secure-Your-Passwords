@@ -5,6 +5,7 @@ body {
     color: #fff;
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 
 :focus {
@@ -26,6 +27,12 @@ a {
 
     .content {
         padding: 1.5rem;
+        overflow-y: scroll;
+        width: 84%;
     }
+}
+
+::-webkit-scrollbar {
+    display: none;  //we will need a different scroll bar maybe
 }
 

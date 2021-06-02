@@ -8,6 +8,15 @@
           flex-direction: column;
 }
 
+#main-page #headings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 #main-page #account-list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,6 +40,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 100px;
+  -webkit-box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.589);
+          box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.589);
+  border-radius: 1rem;
+  padding: .75rem;
+  overflow: hidden;
 }
 
 #main-page #account-list .account-box .account-title {
@@ -40,6 +55,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 200px;
 }
 
 #main-page #account-list .account-box .account-title .account-icon {
@@ -51,6 +67,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+#main-page #account-list .account-box .last-updated {
+  width: 300px;
 }
 
 #main-page #account-list .account-box input {
