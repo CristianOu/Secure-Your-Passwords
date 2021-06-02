@@ -18,4 +18,23 @@
   padding-bottom: 50px;
   margin: auto;
 }
+
+#edit-form input, #edit-form textarea {
+  display: block;
+}
+
+#edit-modal-header {
+  background-color: #4fa085;
+  padding: 50px;
+}
+
+#edit-form form {
+  color: black;
+  margin: 40px;
+  display: inline-block;
+}
+
+#edit-form input, #edit-form textarea {
+  margin-bottom: 20px;
+}
 /*# sourceMappingURL=edit-modal.css.map */

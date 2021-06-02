@@ -122,8 +122,11 @@ function checkCookieMiddleware(req, res, next) {
 
 // UI Calls
 app.get('/', checkCookieMiddleware, (req, res) => {
-    console.log("name " + req.decodedClaims.name);
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + liveChat + footer);
+    // console.log("name " + req.decodedClaims.name);
+    username = `
+        <div id="username-live-chat" style = "display: none">${req.decodedClaims.name}</div>
+    `;
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + username +  liveChat  + footer);
 }); 
 
 app.get('/login', (req, res) => {
@@ -306,7 +309,7 @@ io.on('connection', socket => {
     });
 
     socket.on("disconnect", () => {
-        console.log("socket disconnected")
+        // console.log("socket disconnected")
     });
 });
 

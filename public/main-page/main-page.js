@@ -2,6 +2,7 @@
     const response = await axios.get("/accounts");
     const result = response.data;
     
+    
     result.accounts.map((account) => {
         let convertedDate = new moment(account.last_updated).format('MMMM Do YYYY, h:mm:ss a');
 

@@ -51,12 +51,22 @@ const display = (msg, className, user) => {
     displayMsg.append(msgDiv);
 };
 
-function closeChat() {
+function closeChat() { 
     document.getElementById("live-chat-box").setAttribute("style", 
-        "opacity: 0; z-index: -3; transition: opacity .3s");
+        "opacity: 0; z-index: -3; transition: opacity .1s");
+    
+        document.getElementById("live-chat-btn").setAttribute("style", 
+        "opacity: 1; z-index: 3; transition: opacity .1s");
 }
 
 function openChat() {
     document.getElementById("live-chat-box").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .3s");
+        "opacity: 1; z-index: 3; transition: opacity .1s");
+
+    document.getElementById("live-chat-btn").setAttribute("style", 
+        "opacity: 0; z-index: -3; transition: opacity .1s");
+
+    const name = $("#username-live-chat").text();
+    console.log($(".chat-header #name").text(name))
+    
 }

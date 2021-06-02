@@ -26,9 +26,12 @@
 
 #create-form input, textarea {
   display: block;
+  margin-bottom: 20px;
 }
 
-form {
+#create-modal form {
   display: inline-block;
+  color: black;
+  margin: 40px;
 }
 /*# sourceMappingURL=create-modal.css.map */

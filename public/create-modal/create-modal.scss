@@ -26,9 +26,11 @@
 
 #create-form input, textarea {
     display: block;
-    // margin: 10px;
+    margin-bottom: 20px;
 }
 
-form {
+#create-modal form {
     display: inline-block;
+    color: black;
+    margin: 40px;
 }

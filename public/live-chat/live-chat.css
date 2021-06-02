@@ -2,19 +2,38 @@
   color: black;
 }
 
-.live-chat-btn {
+#live-chat-btn {
   position: absolute;
   display: block;
-  top: 90vh;
-  left: 90vw;
+  top: 93vh;
+  left: 91vw;
+  width: 75px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-family: "Open Sans", sans-serif;
+  max-width: 220px;
+  -webkit-box-shadow: 0 0 5px #62ea15;
+          box-shadow: 0 0 5px #62ea15;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 20px;
+  background: -webkit-gradient(linear, left top, right top, from(#2dca5d), to(#5dcc1c));
+  background: linear-gradient(to right, #2dca5d, #5dcc1c);
+  opacity: .9;
+}
+
+#live-chat-btn:hover {
+  opacity: 1;
+  -webkit-transition: opacity .1s;
+  transition: opacity .1s;
 }
 
 #live-chat-box {
   position: absolute;
   display: block;
   top: 60vh;
-  left: 65vw;
-  width: 30vw;
+  left: 72vw;
+  width: 350px;
   max-width: 500px;
   border-radius: 10px;
   -webkit-box-shadow: 2px 9px 25px rgba(207, 201, 201, 0.842);
@@ -34,7 +53,8 @@
 .chat-header {
   min-height: 50px;
   overflow: hidden;
-  background: rgba(140, 185, 164, 0.863);
+  background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
+  background: linear-gradient(to right, #fcb243, #ffcb5b);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -59,8 +79,9 @@
 }
 
 .logo h3 {
-  letter-spacing: 2px;
+  letter-spacing: 1.2px;
   margin-left: 10px;
+  font-size: 14px;
 }
 
 .chat-header p {
@@ -195,5 +216,18 @@
 
 #name {
   width: 10px;
+}
+
+#close-btn {
+  color: rgb(179, 24, 24);
+  padding: 5px;
+  cursor: pointer;
+}
+
+#close-btn:hover {
+  background: rgb(179, 24, 24);
+  color: white;
+  border-radius: 25%;
+
 }
 /*# sourceMappingURL=live-chat.css.map */
