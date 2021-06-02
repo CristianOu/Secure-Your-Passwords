@@ -26,15 +26,15 @@
 #live-chat-box {
     position: absolute;
     display: block;
-    top: 60vh;
-    left: 72vw;
+    top: 40vh;
+    left: 70vw;
     width: 350px;
     max-width: 500px;
     border-radius: 10px;
     box-shadow: 2px 9px 25px rgba(207, 201, 201, 0.842);
     overflow: hidden;
     border: 1px solid black;
-    background: rgb(206 206 206);
+    background: rgba(206, 206, 206, 1);
     color: black;
     opacity: 0;
     z-index: -3;

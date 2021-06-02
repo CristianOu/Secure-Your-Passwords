@@ -31,8 +31,8 @@
 #live-chat-box {
   position: absolute;
   display: block;
-  top: 60vh;
-  left: 72vw;
+  top: 40vh;
+  left: 70vw;
   width: 350px;
   max-width: 500px;
   border-radius: 10px;
@@ -40,7 +40,7 @@
           box-shadow: 2px 9px 25px rgba(207, 201, 201, 0.842);
   overflow: hidden;
   border: 1px solid black;
-  background: rgba(207, 201, 201, 0.842);
+  background: #cecece;
   color: black;
   opacity: 0;
   z-index: -3;
@@ -86,7 +86,14 @@
 
 .chat-header p {
   margin-right: 20px;
+  cursor: pointer;
   opacity: .8;
+  color: #d62e2e;
+}
+
+.chat-header p:hover {
+  background: #c23c3c;
+  opacity: 1;
 }
 
 .chat-section {
@@ -219,15 +226,10 @@
 }
 
 #close-btn {
-  color: rgb(179, 24, 24);
-  padding: 5px;
-  cursor: pointer;
+  color: white;
 }
 
 #close-btn:hover {
-  background: rgb(179, 24, 24);
-  color: white;
-  border-radius: 25%;
-
+  background: white;
 }
 /*# sourceMappingURL=live-chat.css.map */
