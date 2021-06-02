@@ -30,5 +30,5 @@ function hideDeleteModal() {
 
 function displayDeleteAccount() {
     document.getElementById("delete-modal").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .3s");
+        "opacity: 1; z-index: 3; transition: opacity .4s");
 }

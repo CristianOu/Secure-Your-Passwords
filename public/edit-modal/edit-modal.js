@@ -24,7 +24,7 @@ function displayEditModal(password) {
     oldPassword = password;
     console.log(oldPassword);
     document.getElementById("edit-backdrop").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .3s");
+        "opacity: 1; z-index: 3; transition: opacity .4s");
 }
 
 function submitEditHandler() {

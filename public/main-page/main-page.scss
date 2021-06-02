@@ -50,8 +50,26 @@
         align-items: center;
 
         .create-button {
-            width: 100px;
+            width: 170px;
             height: 50px;
+            background: linear-gradient(to right, #fcb243, #ffcb5b);
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-family: "Open Sans", sans-serif;
+            position: relative;
+            line-height: 50px;
+            display: block;
+            text-align: center;
+            box-shadow: 0 0 5px #fcb243;
+            transition: all 0.2s ease;
+            border-radius: 20px;
+                
+            &:hover {
+                transition: all 0.3s ease;
+                cursor: pointer;
+                box-shadow: 0 0 12px #fcb243;
+            }
+            
         }
     }
 
