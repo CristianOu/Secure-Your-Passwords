@@ -6,6 +6,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 100vh;
 }
 
 :focus {
@@ -14,5 +15,22 @@ body {
 
 a {
   text-decoration: none;
+}
+
+.app-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 85vw;
+  height: 80vh;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  margin: auto;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.app-box .content {
+  padding: 1.5rem;
 }
 /*# sourceMappingURL=styles.css.map */
