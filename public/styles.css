@@ -40,4 +40,8 @@ a {
 ::-webkit-scrollbar {
   display: none;
 }
+
+button {
+  cursor: pointer;
+}
 /*# sourceMappingURL=styles.css.map */

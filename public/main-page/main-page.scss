@@ -5,6 +5,18 @@
     #headings {
         display: flex;
         justify-content: space-between;
+        margin-top: 50px;
+    }
+
+    .title-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .create-button {
+            width: 100px;
+            height: 50px;
+        }
     }
 
     #account-list {
@@ -60,6 +72,14 @@
                 width: 175px;
                 outline: none;
                 opacity: .9;
+            }
+
+            input::selection {
+                background: #2b2b2b; /* WebKit/Blink Browsers */
+            }
+
+            input::-moz-selection {
+            background: #2b2b2b; /* Gecko Browsers */
             }
         }
     }
