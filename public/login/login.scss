@@ -16,7 +16,7 @@
             margin: 35px auto;
             display: flex;
             justify-content: center;
-            box-shadow: 0 0 20px 5px #08fdd8;
+            box-shadow: 0 0 20px 5px #fcb243;
             border-radius: 30px;
             position: relative;
 
@@ -44,7 +44,7 @@
                 position: absolute;
                 width: 110px;
                 height: 100%;
-                background: linear-gradient(to right, #08fdd8, #00ffc8);
+                background: linear-gradient(to right, #fcb243, #ffcb5b);
                 border-radius: 30px;
                 transition: .5s ease;
             }
@@ -105,7 +105,7 @@
             left: 0; 
             width: 0; 
             height: 2px; 
-            background-color: #08fdd8; 
+            background-color: #fcb243; 
             transition: 0.4s;
         }
         
@@ -128,7 +128,7 @@
         .input-field:focus ~ label, .has-content.input-field ~ label {
             top: -16px; 
             font-size: 12px; 
-            color: #08fdd8; 
+            color: #fcb243; 
             transition: 0.3s;
         }
         
@@ -142,7 +142,7 @@
             .submit-button {
                 border: none;
                 outline: none;
-                background: linear-gradient(to right, #08fdd8, #00ffc8);
+                background: linear-gradient(to right, #fcb243, #ffcb5b);
                 font-size: 14px;
                 letter-spacing: 4px;
                 font-family: "Open Sans", sans-serif;
@@ -153,7 +153,7 @@
                 line-height: 50px;
                 display: block;
                 text-align: center;
-                box-shadow: 0 0 5px #08fdd8;
+                box-shadow: 0 0 5px #fcb243;
                 transition: all 0.2s ease;
                 border-radius: 30px;
                 bottom: 0;
@@ -163,7 +163,7 @@
             .submit-button:hover {
                 transition: all 0.3s ease;
                 cursor: pointer;
-                box-shadow: 0 0 12px #08fdd8;
+                box-shadow: 0 0 12px #fcb243;
             }
         }
     }

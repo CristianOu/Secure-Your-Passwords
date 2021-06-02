@@ -179,8 +179,8 @@
   line-height: 50px;
   display: block;
   text-align: center;
-  -webkit-box-shadow: 0 0 5px #ffe15b;
-          box-shadow: 0 0 5px #ffe15b;
+  -webkit-box-shadow: 0 0 5px #fcb243;
+          box-shadow: 0 0 5px #fcb243;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   border-radius: 20px;
@@ -192,8 +192,8 @@
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   cursor: pointer;
-  -webkit-box-shadow: 0 0 12px #ffe15b;
-          box-shadow: 0 0 12px #ffe15b;
+  -webkit-box-shadow: 0 0 12px #fcb243;
+          box-shadow: 0 0 12px #fcb243;
 }
 
 .tooltip {
