@@ -132,7 +132,7 @@
                 width: 180px;
 
                 button {
-                    background: linear-gradient(to right, #08fdd8, #00ffc8);
+                    background: linear-gradient(to right, #ffd35b, #ffcb5b);
                     font-size: 14px;
                     letter-spacing: 2px;
                     font-family: "Open Sans", sans-serif;
@@ -142,7 +142,7 @@
                     line-height: 50px;
                     display: block;
                     text-align: center;
-                    box-shadow: 0 0 5px #08fdd8;
+                    box-shadow: 0 0 5px #ffe15b;
                     transition: all 0.2s ease;
                     border-radius: 20px;
                     bottom: 0;
@@ -151,7 +151,7 @@
                     &:hover {
                         transition: all 0.3s ease;
                         cursor: pointer;
-                        box-shadow: 0 0 12px #08fdd8;
+                        box-shadow: 0 0 12px #ffe15b;
                     }
                 }
             }

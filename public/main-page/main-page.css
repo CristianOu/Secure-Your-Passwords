@@ -168,8 +168,8 @@
 }
 
 #main-page #account-list .account-box .button-group button {
-  background: -webkit-gradient(linear, left top, right top, from(#08fdd8), to(#00ffc8));
-  background: linear-gradient(to right, #08fdd8, #00ffc8);
+  background: -webkit-gradient(linear, left top, right top, from(#ffd35b), to(#ffcb5b));
+  background: linear-gradient(to right, #ffd35b, #ffcb5b);
   font-size: 14px;
   letter-spacing: 2px;
   font-family: "Open Sans", sans-serif;
@@ -179,8 +179,8 @@
   line-height: 50px;
   display: block;
   text-align: center;
-  -webkit-box-shadow: 0 0 5px #08fdd8;
-          box-shadow: 0 0 5px #08fdd8;
+  -webkit-box-shadow: 0 0 5px #ffe15b;
+          box-shadow: 0 0 5px #ffe15b;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   border-radius: 20px;
@@ -192,8 +192,8 @@
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   cursor: pointer;
-  -webkit-box-shadow: 0 0 12px #08fdd8;
-          box-shadow: 0 0 12px #08fdd8;
+  -webkit-box-shadow: 0 0 12px #ffe15b;
+          box-shadow: 0 0 12px #ffe15b;
 }
 
 .tooltip {
