@@ -35,7 +35,7 @@
 
 #main-page #headings :nth-child(4) {
   min-width: 5rem;
-  width: 300px;
+  width: 230px;
 }
 
 #main-page #headings :nth-child(5) {
@@ -126,6 +126,7 @@
 
 #main-page #account-list .account-box .last-updated {
   width: 300px;
+  text-align: center;
 }
 
 #main-page #account-list .account-box input {
