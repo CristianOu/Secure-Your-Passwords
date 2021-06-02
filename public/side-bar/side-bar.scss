@@ -14,4 +14,38 @@
     hr {
         border-color: #1d1d1d;
     }
+
+    .top-section {
+
+        .profile-picture {
+            width: 60%;
+        }
+    }
+
+    .bottom-section {
+
+        .promo {
+            font-family: "Poppins", sans-serif;
+            width: 85%;
+            height: 120px;
+            background: linear-gradient(to right top, #2c2b2b, #161616);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin: 50px auto;
+            border-radius: 1.5rem;
+            color: #cfcece;
+            display: flex;
+            align-items: center;
+            padding: .5rem;
+
+            .text {
+                width: 50%;
+            }
+
+            .security-picture {
+                height: 100%;
+            }
+        }
+
+        
+    }
 }
