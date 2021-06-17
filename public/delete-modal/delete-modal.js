@@ -18,9 +18,6 @@ function deleteAccount(id) {
             hideNotification();
         }, 2000);
     });
-    
-    
-    
 }
 
 function hideDeleteModal() {

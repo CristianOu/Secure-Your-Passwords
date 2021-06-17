@@ -86,74 +86,6 @@
   transition: .5s ease;
 }
 
-#login-page .form-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#login-page .form-box label {
-  cursor: default;
-}
-
-#login-page .form-box .input {
-  margin-bottom: 20px;
-  margin: 30px 0 0 0;
-  position: relative;
-}
-
-#login-page .form-box .input-field {
-  background: #2b2b2b;
-  color: #8d8d8d;
-  padding: 4px 10px;
-  border: 0;
-  height: 50px;
-  font-size: 16px;
-  overflow: hidden;
-  border-bottom: #2b2b2b solid 1px;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  letter-spacing: 1px;
-}
-
-#login-page .form-box .input-field ~ .focus-border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #fcb243;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-#login-page .form-box .input-field:focus ~ .focus-border, #login-page .form-box .has-content.input-field ~ .focus-border {
-  width: 100%;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-#login-page .form-box .input-field ~ label {
-  position: absolute;
-  left: 0;
-  top: 15px;
-  color: #aaa;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  letter-spacing: 0.5px;
-  cursor: default;
-  margin-left: 10px;
-}
-
-#login-page .form-box .input-field:focus ~ label, #login-page .form-box .has-content.input-field ~ label {
-  top: -16px;
-  font-size: 12px;
-  color: #fcb243;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
 #login-page .form-box .submit-box {
   width: 387px;
   height: 125px;
@@ -164,35 +96,10 @@
   display: flex;
 }
 
-#login-page .form-box .submit-box .submit-button {
-  border: none;
-  outline: none;
-  background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
-  background: linear-gradient(to right, #fcb243, #ffcb5b);
-  font-size: 14px;
-  letter-spacing: 4px;
-  font-family: "Open Sans", sans-serif;
-  text-decoration: none;
-  position: relative;
+#login-page .form-box .submit-box .form-button {
   width: 100%;
-  max-width: 220px;
-  line-height: 50px;
   display: block;
-  text-align: center;
-  -webkit-box-shadow: 0 0 5px #fcb243;
-          box-shadow: 0 0 5px #fcb243;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  border-radius: 30px;
   bottom: 0;
   margin: 35px auto;
-}
-
-#login-page .form-box .submit-box .submit-button:hover {
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  -webkit-box-shadow: 0 0 12px #fcb243;
-          box-shadow: 0 0 12px #fcb243;
 }
 /*# sourceMappingURL=login.css.map */

@@ -1,3 +1,15 @@
+$(".input-field").focusout(function(){
+    if($(this).val() != ""){
+        $(this).addClass("has-content");
+    }else{
+        $(this).removeClass("has-content");
+    }
+});
+
+$("label").on('click', function() {
+    $(this).prev().focus();
+});
+
 function displayCreateModal() {
     // document.getElementById("modal-backdrop").setAttribute("style", 
     //     "opacity: 1; z-index: 3; transition: opacity .4s");

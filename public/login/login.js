@@ -6,7 +6,7 @@ $(".input-field").focusout(function(){
     }
 });
 
-$(".label").on('click', function() {
+$("label").on('click', function() {
     $(this).prev().focus();
 });
 
