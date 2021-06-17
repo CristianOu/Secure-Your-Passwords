@@ -1,23 +1,53 @@
+$(".input-field").focusout(function(){
+    if($(this).val() != ""){
+        $(this).addClass("has-content");
+    }else{
+        $(this).removeClass("has-content");
+    }
+});
+ 
+$("label").on('click', function() {
+    $(this).prev().focus();
+});
+
+
 let accountId = '';
 let lastUpdated = '';
 
 $(document).on("click", '.edit', function(){
-    // event.preventDefault();
     accountId = $(this).attr('data-id');
     
     const result = axios.get('/account/' + accountId);
     result.then(response => {
-        $("#edit-name-of-account").val(response.data.account[0].name);
-        $("#edit-username").val(response.data.account[0].username);
-        $("#edit-password").val(response.data.account[0].password);
-        $("#edit-details").val(response.data.account[0].details);
+        const accountName = $("#edit-name-of-account");
+        accountName.val(response.data.account[0].name);
+        accountName.addClass("has-content");
+
+        const username = $("#edit-username");
+        username.val(response.data.account[0].username);
+        username.addClass("has-content");
+
+
+        const password = $("#edit-password");
+        password.val(response.data.account[0].password);
+        password.addClass("has-content");
+
+
+        const details = $("#edit-details");
+        details.val(response.data.account[0].details);
+        
+        // Because this one is optional
+        if(details.val() != "") {
+            details.addClass("has-content");
+        } else {
+            details.removeClass("has-content");
+        }
+
         lastUpdated = response.data.account[0].last_updated;
     });
 });
 
 function hideEditModal() {
-    // document.getElementById('modal-backdrop').setAttribute("style", 
-    //     "opacity: 0; z-index: -3;");
     $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
 }
 
@@ -25,8 +55,6 @@ let oldPassword = "";
 function displayEditModal(password) {
     oldPassword = password;
     console.log(oldPassword);
-    // document.getElementById("modal-backdrop").setAttribute("style", 
-    //     "opacity: 1; z-index: 3; transition: opacity .4s");
 
     $(".modal-backdrop").eq(2).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
 }

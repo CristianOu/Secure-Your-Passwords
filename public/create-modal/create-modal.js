@@ -11,15 +11,10 @@ $("label").on('click', function() {
 });
 
 function displayCreateModal() {
-    // document.getElementById("modal-backdrop").setAttribute("style", 
-    //     "opacity: 1; z-index: 3; transition: opacity .4s");
     $(".modal-backdrop").eq(0).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
 }
 
 function hideCreateModal() {
-    // document.getElementById('modal-backdrop').setAttribute("style", 
-    //     "opacity: 0; z-index: -3;");
-
     $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
 }
 

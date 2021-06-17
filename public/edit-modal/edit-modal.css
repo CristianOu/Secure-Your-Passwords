@@ -1,26 +1,7 @@
-#edit-modal {
-  background-color: white;
-  width: 600px;
-  padding-bottom: 50px;
-  margin: auto;
-}
-
-#edit-form input, #edit-form textarea {
-  display: block;
-}
-
-#edit-modal-header {
-  background-color: #4fa085;
-  padding: 50px;
-}
-
-#edit-form form {
-  color: black;
-  margin: 40px;
+.modal-content #edit-form {
   display: inline-block;
-}
-
-#edit-form input, #edit-form textarea {
-  margin-bottom: 20px;
+  padding: 40px;
+  padding-bottom: 20px;
+  width: calc(100% - 80px);
 }
 /*# sourceMappingURL=edit-modal.css.map */
