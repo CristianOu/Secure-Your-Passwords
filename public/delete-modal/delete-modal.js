@@ -24,11 +24,15 @@ function deleteAccount(id) {
 }
 
 function hideDeleteModal() {
-    document.getElementById('delete-modal').setAttribute("style", 
-        "opacity: 0; z-index: -3;");
+    // document.getElementById('modal-backdrop').setAttribute("style", 
+    //     "opacity: 0; z-index: -3;");
+
+    $(".modal-backdrop").eq(1).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
 }
 
 function displayDeleteAccount() {
-    document.getElementById("delete-modal").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .4s");
+    // document.getElementById("modal-backdrop").setAttribute("style", 
+    //     "opacity: 1; z-index: 3; transition: opacity .4s");
+    
+    $(".modal-backdrop").eq(1).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
 }

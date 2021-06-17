@@ -1,5 +1,6 @@
 let accountId = '';
 let lastUpdated = '';
+
 $(document).on("click", '.edit', function(){
     // event.preventDefault();
     accountId = $(this).attr('data-id');
@@ -15,16 +16,19 @@ $(document).on("click", '.edit', function(){
 });
 
 function hideEditModal() {
-    document.getElementById('edit-backdrop').setAttribute("style", 
-        "opacity: 0; z-index: -3;");
+    // document.getElementById('modal-backdrop').setAttribute("style", 
+    //     "opacity: 0; z-index: -3;");
+    $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
 }
 
 let oldPassword = "";
 function displayEditModal(password) {
     oldPassword = password;
     console.log(oldPassword);
-    document.getElementById("edit-backdrop").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .4s");
+    // document.getElementById("modal-backdrop").setAttribute("style", 
+    //     "opacity: 1; z-index: 3; transition: opacity .4s");
+
+    $(".modal-backdrop").eq(2).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
 }
 
 function submitEditHandler() {

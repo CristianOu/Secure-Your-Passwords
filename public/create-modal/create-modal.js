@@ -1,13 +1,14 @@
-// console.log("Create-modal");
 function displayCreateModal() {
-    document.getElementById("create-modal").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .4s");
+    // document.getElementById("modal-backdrop").setAttribute("style", 
+    //     "opacity: 1; z-index: 3; transition: opacity .4s");
+    $(".modal-backdrop").eq(0).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
 }
 
 function hideCreateModal() {
+    // document.getElementById('modal-backdrop').setAttribute("style", 
+    //     "opacity: 0; z-index: -3;");
 
-    document.getElementById('create-modal').setAttribute("style", 
-        "opacity: 0; z-index: -3;");
+    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
 }
 
 function submitCreateHandler() {
