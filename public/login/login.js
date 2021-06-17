@@ -20,7 +20,7 @@ let registerButton = $('.toggle-btn.register');
 function register() {
     loginForm.css('left', '-450px');
     registerForm.css('left', '0');
-    toggle.css('left', '110px');
+    toggle.css({'left': '110px', 'background': 'linear-gradient(to right, #ffcb5b, #fcb243)'});
     loginButton.css('color', 'white');
     registerButton.css('color', 'black');
 }
@@ -28,7 +28,7 @@ function register() {
 function login() {
     loginForm.css('left', '0');
     registerForm.css('left', '450px');
-    toggle.css('left', '0');
+    toggle.css({'left': '0', 'background': 'linear-gradient(to right, #fcb243, #ffcb5b)'});
     loginButton.css('color', 'black');
     registerButton.css('color', 'white');
 }

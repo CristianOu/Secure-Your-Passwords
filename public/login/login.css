@@ -61,8 +61,8 @@
   background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
   background: linear-gradient(to right, #fcb243, #ffcb5b);
   border-radius: 30px;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
 #login-page .form-box #login-form {
