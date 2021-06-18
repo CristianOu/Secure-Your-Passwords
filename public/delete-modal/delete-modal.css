@@ -1,8 +1,14 @@
-#modal-content {
-  background-color: white;
-  width: 600px;
-  padding-bottom: 50px;
-  margin: auto;
-  color: black;
+.modal-content-delete {
+  height: 250px;
+}
+
+.modal-content-delete .modal-header {
+  padding: 20px;
+}
+
+.modal-content-delete p {
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 0;
 }
 /*# sourceMappingURL=delete-modal.css.map */
