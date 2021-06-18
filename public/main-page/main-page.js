@@ -13,8 +13,8 @@
                     
                     <span class="field">${account.name}</span>
                 </div>
-
-                <div class="account-username"> 
+                
+                <div class="account-username">
                     <input type="text" class="field" disabled value="${account.username}" />
                     <button class="button-small copy" onClick="copyText(${account.id}, 'account-username')" >
                         <i class="far fa-2x fa-copy"></i>
