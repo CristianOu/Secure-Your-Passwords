@@ -1,13 +1,21 @@
-// console.log("Create-modal");
+$(".input-field").focusout(function(){
+    if($(this).val() != ""){
+        $(this).addClass("has-content");
+    }else{
+        $(this).removeClass("has-content");
+    }
+});
+
+$("label").on('click', function() {
+    $(this).prev().focus();
+});
+
 function displayCreateModal() {
-    document.getElementById("create-modal").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .4s");
+    $(".modal-backdrop").eq(0).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s .05s, z-index .05s"});
 }
 
 function hideCreateModal() {
-
-    document.getElementById('create-modal').setAttribute("style", 
-        "opacity: 0; z-index: -3;");
+    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
 }
 
 function submitCreateHandler() {

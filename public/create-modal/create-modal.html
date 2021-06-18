@@ -1,48 +1,75 @@
-<div id="create-modal">
+<div class="modal-backdrop">
     <div class="modal-content">
-        <div class="modal-container">
+        <div class="modal-header">
             Create New Account
         </div>
-        <div id="create-form">
-            <form id="create-form" onsubmit="submitCreateHandler()">
-                <label for="name">Name of account</label>
-                <input 
-                    type="text" 
-                    placeholder="Name of account" 
-                    name="name" 
-                    id="name-of-account"
-                    pattern="[A-Za-z0-9-_./]{2,}"
-                    title="Must contain at least 2 characters. No special character allowed"
-                    required/>
 
-                <label for="name">Username</label>
-                <input type="text" 
-                    placeholder="Username" 
-                    name="username" 
-                    id="username"
-                    pattern="[A-Za-z0-9-_@.]{2,}"
-                    title="Allowed characters: [A-Z a-z 0-9 @_.-]; Minimum 2 characters"
-                    required /> 
-                <label for="name">Password</label>
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    name="password"
-                    minlength="4"
-                    id="password"
-                    required />
-                <label for="name">Details</label>
-                <textarea 
-                    type="text" 
-                    placeholder="Details (optional)" 
-                    name="details" 
-                    id="details"></textarea>
-                <button type="submit">
-                    Save
-                </button>
-            </form>
+        <form id="create-form" onsubmit="submitCreateHandler()">
+            <ul>
+                <li class="input">
+                    <input 
+                        type="text" 
+                        placeholder="" 
+                        name="name" 
+                        id="name-of-account"
+                        pattern="[A-Za-z0-9-_./]{2,}"
+                        title="Must contain at least 2 characters. No special character allowed"
+                        required
+                        class="input-field"
+                    />
+                    <label>Name of account</label>
+                    <span class="focus-border"></span>
+                </li>
 
-            <button onClick="hideCreateModal()">Cancel</button>
+                <li class="input">
+                    <input type="text" 
+                        placeholder="" 
+                        name="username" 
+                        id="username"
+                        pattern="[A-Za-z0-9-_@.]{2,}"
+                        title="Allowed characters: [A-Z a-z 0-9 @_.-]; Minimum 2 characters"
+                        required 
+                        class="input-field"
+                    /> 
+                    <label>Username</label>
+                    <span class="focus-border"></span>
+                </li>
+
+                <li class="input">
+                    <input 
+                        type="password" 
+                        placeholder="" 
+                        name="password"
+                        minlength="4"
+                        id="password"
+                        required 
+                        class="input-field"
+                    />
+                    <label>Password</label>
+                    <span class="focus-border"></span>
+                </li>
+
+                <li class="input">
+                    <textarea 
+                        type="text" 
+                        placeholder="" 
+                        name="details" 
+                        id="details"
+                        class="input-field"
+                    >    
+                    </textarea>
+                    <label>Details</label>
+                    <span class="focus-border"></span>
+                </li>
+                
+            </ul>
+
+        </form>
+
+        <div class="button-box">
+            <button class="form-button cancel" onClick="hideCreateModal()">Cancel</button>
+
+            <button class="form-button" type="submit" form="create-form">Save</button>
         </div>
     </div>
 </div>
