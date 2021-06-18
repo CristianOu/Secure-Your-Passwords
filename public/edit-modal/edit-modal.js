@@ -54,7 +54,7 @@ function hideEditModal() {
 let oldPassword = "";
 function displayEditModal(password) {
     oldPassword = password;
-    console.log(oldPassword);
+    // console.log(oldPassword);
 
     $(".modal-backdrop").eq(2).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s .05s, z-index .05s"});
 }
@@ -69,7 +69,7 @@ function submitEditHandler() {
         isPasswordChanged = true;
     } 
     convertedDate = new moment(lastUpdated).format('YYYY-MM-DD HH:mm:ss');
-    console.log(oldPassword)
+    // console.log(oldPassword)
     
     const updatedAccount = {
         
