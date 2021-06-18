@@ -65,7 +65,7 @@ button:active {
   padding-top: 100px;
 }
 
-.modal-content {
+.modal-content, .modal-content-delete {
   height: 600px;
   width: 460px;
   -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
@@ -76,13 +76,13 @@ button:active {
   overflow: auto;
 }
 
-.modal-content .modal-header {
+.modal-content .modal-header, .modal-content-delete .modal-header {
   background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
   background: linear-gradient(to right, #fcb243, #ffcb5b);
   padding: 50px;
 }
 
-.modal-content .button-box {
+.modal-content .button-box, .modal-content-delete .button-box {
   width: calc(100% -40px);
   padding: 20px;
   padding-top: 10px;
