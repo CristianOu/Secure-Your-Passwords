@@ -21,9 +21,9 @@ function deleteAccount(id) {
 }
 
 function hideDeleteModal() {
-    $(".modal-backdrop").eq(1).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
+    $(".modal-backdrop").eq(1).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
 }
 
 function displayDeleteAccount() {
-    $(".modal-backdrop").eq(1).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
+    $(".modal-backdrop").eq(1).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s .05s, z-index .05s"});
 }

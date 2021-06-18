@@ -48,7 +48,7 @@ $(document).on("click", '.edit', function(){
 });
 
 function hideEditModal() {
-    $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
+    $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
 }
 
 let oldPassword = "";
@@ -56,7 +56,7 @@ function displayEditModal(password) {
     oldPassword = password;
     console.log(oldPassword);
 
-    $(".modal-backdrop").eq(2).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
+    $(".modal-backdrop").eq(2).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s .05s, z-index .05s"});
 }
 
 function submitEditHandler() {

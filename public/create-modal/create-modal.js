@@ -11,11 +11,11 @@ $("label").on('click', function() {
 });
 
 function displayCreateModal() {
-    $(".modal-backdrop").eq(0).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s"});
+    $(".modal-backdrop").eq(0).css({"opacity": "1", "z-index": "3", "transition": "opacity .4s .05s, z-index .05s"});
 }
 
 function hideCreateModal() {
-    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity 0s"});
+    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
 }
 
 function submitCreateHandler() {
