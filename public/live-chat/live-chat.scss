@@ -15,6 +15,7 @@
     max-width: 220px;
     transition: all 0.2s ease;
     border-radius: 20px;
+    transform: scaleX(-1);
     
     opacity: .9;
     &:hover {
@@ -23,6 +24,7 @@
     }
     .icon-chat {
         width: 55px;
+        
     }
 }
 
@@ -180,10 +182,12 @@
     cursor: pointer;
     padding: 5px;
     margin-right: 10px;
+    transition: all .1s;
     &:hover {
         background: white;
         color: tomato;
-        border-radius: 10px;
+        border-radius: 20px;
+        transition: all .1s ease;
     }
 }
 
@@ -206,11 +210,7 @@ transform: scale(1,1) translate(0px, 0px);
 }
 
 .bounce {
-     
-    &:active {
-        animation: bounce 0.1s;
-    }
     &:hover {
-        animation: bounce 0.4s;
+        animation: bounce 0.4s ease;
     } 
 }

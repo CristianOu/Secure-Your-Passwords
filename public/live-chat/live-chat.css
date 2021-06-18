@@ -15,6 +15,8 @@
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   border-radius: 20px;
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
   opacity: .9;
 }
 
@@ -214,12 +216,16 @@
   cursor: pointer;
   padding: 5px;
   margin-right: 10px;
+  -webkit-transition: all .1s;
+  transition: all .1s;
 }
 
 #close-btn:hover {
   background: white;
   color: tomato;
-  border-radius: 10px;
+  border-radius: 20px;
+  -webkit-transition: all .1s ease;
+  transition: all .1s ease;
 }
 
 @-webkit-keyframes bounce {
@@ -260,13 +266,8 @@
   }
 }
 
-.bounce:active {
-  -webkit-animation: bounce 0.1s;
-          animation: bounce 0.1s;
-}
-
 .bounce:hover {
-  -webkit-animation: bounce 0.4s;
-          animation: bounce 0.4s;
+  -webkit-animation: bounce 0.4s ease;
+          animation: bounce 0.4s ease;
 }
 /*# sourceMappingURL=live-chat.css.map */

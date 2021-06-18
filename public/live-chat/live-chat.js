@@ -52,13 +52,14 @@ const display = (msg, className, user) => {
 };
 
 function closeChat() { 
-    $("#live-chat-box").css({"opacity": "0", "z-index": "-3"});
+
+    $("#live-chat-box").css({"opacity": "0", "z-index": "-3", "transition": "opacity .15s, z-index .05s .15s"});
 
     $("#live-chat-btn").css({"opacity": "1", "z-index": "3"});
 }
 
 function openChat() {
-    $("#live-chat-box").css({"opacity": "1", "z-index": "3", "transition": "opacity .1s"});
+    $("#live-chat-box").css({"opacity": "1", "z-index": "3", "transition": "opacity .1s, z-index .05s"});
 
     $("#live-chat-btn").css({"opacity": "0", "z-index": "-3", "transition": "opacity .1s"});
 
