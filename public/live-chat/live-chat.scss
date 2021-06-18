@@ -5,21 +5,24 @@
 #live-chat-btn {
     position: absolute;
     display: block;
-    top: 93vh;
-    left: 91vw;
-    width: 75px;
+    background: none;
+    top: 88vh;
+    left: 94vw;
     font-size: 14px;
     letter-spacing: 2px;
+    
     font-family: "Open Sans", sans-serif;
     max-width: 220px;
-    box-shadow: 0 0 5px #62ea15;
     transition: all 0.2s ease;
     border-radius: 20px;
-    background: linear-gradient(to right, #2dca5d, #5dcc1c);
+    
     opacity: .9;
     &:hover {
         opacity: 1;
         transition: opacity .1s;
+    }
+    .icon-chat {
+        width: 55px;
     }
 }
 
@@ -27,8 +30,8 @@
     position: absolute;
     display: block;
     top: 40vh;
-    left: 70vw;
-    width: 350px;
+    left: 75vw;
+    width: 300px;
     max-width: 500px;
     border-radius: 10px;
     box-shadow: 2px 9px 25px rgba(207, 201, 201, 0.842);
@@ -58,24 +61,13 @@
     display: flex;
     align-items: center;
     margin-left: 20px;
-    color: rgb(124, 85, 12);
+    color: rgb(0, 0, 0);
 }
 
 .logo h3 {
     letter-spacing: 1.2px;
     margin-left: 10px;
     font-size: 14px;
-}
-
-.chat-header p {
-    margin-right: 20px;
-    cursor: pointer;
-    opacity: .8;
-    color: rgb(214, 46, 46);
-    &:hover {
-        background: rgb(194, 60, 60);
-        opacity: 1;
-    }
 }
 
 .chat-section {
@@ -182,15 +174,43 @@
     color: #1f6868;
 }
 
-#name {
-    width: 10px;
-}
 
 #close-btn {
     color: white;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
     &:hover {
         background: white;
+        color: tomato;
+        border-radius: 10px;
     }
+}
 
+@keyframes bounce {
+    0% {
+transform: scale(1,1) translate(0px, 0px);
+}
 
+30%{
+transform: scale(1,0.8) translate(0px, 2px); 
+}
+
+75%{
+transform: scale(1,1.1) translate(0px, -3px);      
+}
+
+100% {
+transform: scale(1,1) translate(0px, 0px);
+}
+}
+
+.bounce {
+     
+    &:active {
+        animation: bounce 0.1s;
+    }
+    &:hover {
+        animation: bounce 0.4s;
+    } 
 }

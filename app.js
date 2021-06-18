@@ -122,11 +122,7 @@ function checkCookieMiddleware(req, res, next) {
 
 // UI Calls
 app.get('/', checkCookieMiddleware, (req, res) => {
-    // console.log("name " + req.decodedClaims.name);
-    username = `
-        <div id="username-live-chat" style = "display: none">${req.decodedClaims.name}</div>
-    `;
-    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification + username +  liveChat  + footer);
+    res.send(header + sideBar + mainPage + create + deleteAccount + edit + notification +  liveChat  + footer);
 }); 
 
 app.get('/login', (req, res) => {

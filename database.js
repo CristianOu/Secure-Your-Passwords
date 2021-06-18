@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 connection.connect(error => {
     if(error) {
-        return console.log('error' + error.message);
+        return console.log('Error: ' + error.message);
     }
 
     console.log('Database:', connection.state);

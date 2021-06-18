@@ -35,7 +35,7 @@ const display = (msg, className, user) => {
     const time = new Date().toLocaleTimeString();
     const innerText = `
         <div class="message-title">
-        👻<span>${user}</span>
+        <span>${user}</span>
         </div>
 
         <div class="message-text">
@@ -52,21 +52,15 @@ const display = (msg, className, user) => {
 };
 
 function closeChat() { 
-    document.getElementById("live-chat-box").setAttribute("style", 
-        "opacity: 0; z-index: -3; transition: opacity .1s");
-    
-        document.getElementById("live-chat-btn").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .1s");
+    $("#live-chat-box").css({"opacity": "0", "z-index": "-3"});
+
+    $("#live-chat-btn").css({"opacity": "1", "z-index": "3"});
 }
 
 function openChat() {
-    document.getElementById("live-chat-box").setAttribute("style", 
-        "opacity: 1; z-index: 3; transition: opacity .1s");
+    $("#live-chat-box").css({"opacity": "1", "z-index": "3", "transition": "opacity .1s"});
 
-    document.getElementById("live-chat-btn").setAttribute("style", 
-        "opacity: 0; z-index: -3; transition: opacity .1s");
+    $("#live-chat-btn").css({"opacity": "0", "z-index": "-3", "transition": "opacity .1s"});
 
-    const name = $("#username-live-chat").text();
-    console.log($(".chat-header #name").text(name))
-    
+    $(".chat-header #name").text(username);
 }
