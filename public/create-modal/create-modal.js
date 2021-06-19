@@ -27,7 +27,7 @@ function submitCreateHandler() {
         password: $('#password').val(),
         details: $('#details').val() || '',
         logo_upload: '',
-        logo_url: '',
+        logo_url: $('#logo-url').val()
     };
     const request = axios.post('/account', newAccount);
     request.then(result => {

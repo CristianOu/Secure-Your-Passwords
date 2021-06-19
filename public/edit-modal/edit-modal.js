@@ -32,6 +32,10 @@ $(document).on("click", '.edit', function(){
         password.val(response.data.account[0].password);
         password.addClass("has-content");
 
+        const logo_url = $("#edit-logo-url");
+        logo_url.val(response.data.account[0].logo_url);
+        logo_url.addClass("has-content");
+
 
         const details = $("#edit-details");
         details.val(response.data.account[0].details);
@@ -79,7 +83,7 @@ function submitEditHandler() {
         password: $('#edit-password').val(),
         details: $('#edit-details').val() || '',
         logo_upload: '',
-        logo_url: '',
+        logo_url: $('#edit-logo-url').val(),
         last_updated: convertedDate,
         isPasswordChanged: isPasswordChanged
     };
@@ -88,6 +92,7 @@ function submitEditHandler() {
     request.then(() => {
 
         //edit the fields in the UI
+        $("#" + accountId + " .account-title .account-icon").attr( "src", updatedAccount.logo_url );
         $("#" + accountId + " .account-title .field").text( updatedAccount.name );
         $("#" + accountId + " .account-username .field").val( updatedAccount.username );
         $("#" + accountId + " .account-password .field").val( updatedAccount.password );

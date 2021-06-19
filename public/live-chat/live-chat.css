@@ -33,8 +33,8 @@
 #live-chat-box {
   position: absolute;
   display: block;
-  top: 43vh;
-  left: 75vw;
+  top: calc(97% - 410px);
+  left: calc(100% - 475px);
   width: 300px;
   max-width: 500px;
   border-radius: 10px;

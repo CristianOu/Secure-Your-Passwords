@@ -222,7 +222,7 @@ app.post('/account', checkCookieMiddleware, async (req, res) => {
         password_content: cryptedPassword.content,
         details: req.body.details || '',
         logo_upload: '',
-        logo_url: '',
+        logo_url: req.body.logo_url,
     };
 
     const db = dbService.getDbServiceInstance();
@@ -253,7 +253,7 @@ app.patch('/account',  checkCookieMiddleware, (req, res) => {
         password_content: encryptedPassword.content,
         details: req.body.details || '',
         logo_upload: '',
-        logo_url: '',
+        logo_url: req.body.logo_url,
         last_updated: req.body.last_updated,
         isPasswordChanged: req.body.isPasswordChanged
     };
