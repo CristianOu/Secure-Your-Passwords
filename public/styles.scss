@@ -74,13 +74,15 @@ button {
 
     .modal-header {
         background: linear-gradient(to right, #fcb243, #ffcb5b);
-        padding: 50px;
+        padding: 20px;
+        font-weight: 900;
+        font-size: 25px;
     }
 
     .button-box {
         width: calc(100% -40px);
-        padding: 20px;
-        padding-top: 10px;
+        padding: 15px;
+        padding-top: 0;
         display: flex;
         justify-content: space-between;
     }
@@ -164,7 +166,7 @@ form {
     font-family: "Open Sans", sans-serif;
     text-decoration: none;
     position: relative;
-    min-width: 150px;
+    min-width: 135px;
     max-width: 220px;
     line-height: 50px;
     text-align: center;

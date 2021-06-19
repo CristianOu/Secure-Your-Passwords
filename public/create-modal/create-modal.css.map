@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAEI,cAFU,CAEV,YAAY,CAAC;EACT,OAAO,EAAE,YAAY;EACrB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,IAAI;EACpB,KAAK,EAAE,iBAAiB;CAC3B",
+    "mappings": "AAAA,AAEI,cAFU,CAEV,YAAY,CAAC;EACT,OAAO,EAAE,YAAY;EACrB,OAAO,EAAE,mBAAmB;EAC5B,KAAK,EAAE,iBAAiB;CAC3B",
     "sources": [
         "create-modal.scss"
     ],

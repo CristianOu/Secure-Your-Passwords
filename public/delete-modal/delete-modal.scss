@@ -1,17 +1,27 @@
 .modal-content-delete {
     height: 250px;
-    // width: 460px;
 
     .modal-header {
-        padding: 20px;
-        color: #ca3318;
-        font-weight: 900;
-        font-size: 25px;
+        color: rgb(221, 221, 221);
+        background: linear-gradient(to right, #ec1919, #c72b2b);
     }
 
     p {
         text-align: center;
         padding: 20px;
         padding-bottom: 0;
+    }
+
+    .form-button {
+
+        &.delete {
+            background: linear-gradient(to right, #ec1919, #c72b2b);
+            box-shadow: 0 0 5px #ec1919;
+            color:rgb(221, 221, 221);
+
+            &:hover {
+                box-shadow: 0 0 15px #fc0c0c;
+            }
+        }
     }
 }

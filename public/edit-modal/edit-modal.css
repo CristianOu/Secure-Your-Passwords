@@ -1,7 +1,6 @@
 .modal-content #edit-form {
   display: inline-block;
-  padding: 40px;
-  padding-bottom: 20px;
+  padding: 20px 40px 20px 40px;
   width: calc(100% - 80px);
 }
 /*# sourceMappingURL=edit-modal.css.map */

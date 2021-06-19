@@ -17,7 +17,7 @@ const { encrypt, decrypt } = require('./crypto');
 const serviceAccountKey = require('./serviceAccountKey.json');
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccountKey),
+    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_CREDS)),
     databaseURL: "https://your-passwords-9900c-default-rtdb.europe-west1.firebasedatabase.app"
 });
 

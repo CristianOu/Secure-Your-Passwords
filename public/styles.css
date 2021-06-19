@@ -79,13 +79,15 @@ button:active {
 .modal-content .modal-header, .modal-content-delete .modal-header {
   background: -webkit-gradient(linear, left top, right top, from(#fcb243), to(#ffcb5b));
   background: linear-gradient(to right, #fcb243, #ffcb5b);
-  padding: 50px;
+  padding: 20px;
+  font-weight: 900;
+  font-size: 25px;
 }
 
 .modal-content .button-box, .modal-content-delete .button-box {
   width: calc(100% -40px);
-  padding: 20px;
-  padding-top: 10px;
+  padding: 15px;
+  padding-top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -174,7 +176,7 @@ form .input-field:focus ~ label, form .has-content.input-field ~ label {
   font-family: "Open Sans", sans-serif;
   text-decoration: none;
   position: relative;
-  min-width: 150px;
+  min-width: 135px;
   max-width: 220px;
   line-height: 50px;
   text-align: center;
