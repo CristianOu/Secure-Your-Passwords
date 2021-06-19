@@ -21,7 +21,7 @@ function deleteAccount(id) {
 }
 
 function hideDeleteModal() {
-    $(".modal-backdrop").eq(1).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
+    $(".modal-backdrop").eq(1).css({"opacity": "0", "z-index": "-3", "transition": "opacity .2s, z-index .05s .2s"});
 }
 
 function displayDeleteAccount() {

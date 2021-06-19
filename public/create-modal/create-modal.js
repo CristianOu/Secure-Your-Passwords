@@ -15,7 +15,7 @@ function displayCreateModal() {
 }
 
 function hideCreateModal() {
-    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
+    $(".modal-backdrop").eq(0).css({"opacity": "0", "z-index": "-3", "transition": "opacity .2s, z-index .05s .2s"});
 }
 
 function submitCreateHandler() {

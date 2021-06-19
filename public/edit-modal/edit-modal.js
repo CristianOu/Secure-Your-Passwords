@@ -52,7 +52,7 @@ $(document).on("click", '.edit', function(){
 });
 
 function hideEditModal() {
-    $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity .4s, z-index .05s .4s"});
+    $(".modal-backdrop").eq(2).css({"opacity": "0", "z-index": "-3", "transition": "opacity .2s, z-index .05s .2s"});
 }
 
 let oldPassword = "";
