@@ -3,27 +3,12 @@ const mysql = require("mysql");
 let instance = null;
 
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host     : process.env.DB_HOST,
     database : process.env.DB_DATABASE,
     user     : process.env.DB_USER,
     password : process.env.DB_PASSWORD
 });
-
-connection.connect(error => {
-    if(error) {
-        return console.log('Error: ' + error.message);
-    }
-
-    console.log('Database:', connection.state);
-});
-
-setInterval(keepAlive, 300000);
-function keepAlive() {
-    connection.query('SELECT 1');
-    console.log("I will survive!");
-    return;
-}
 
 class DbService {
     static getDbServiceInstance() {

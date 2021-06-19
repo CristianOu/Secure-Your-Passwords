@@ -24,7 +24,6 @@ admin.initializeApp({
 // CSRF Protection 
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
-const { Cookie } = require('cookies');
 const csrfMiddleware = csrf({ cookie: true });
 
 app.use(express.json());
