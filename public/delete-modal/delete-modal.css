@@ -4,6 +4,9 @@
 
 .modal-content-delete .modal-header {
   padding: 20px;
+  color: #ca3318;
+  font-weight: 900;
+  font-size: 25px;
 }
 
 .modal-content-delete p {

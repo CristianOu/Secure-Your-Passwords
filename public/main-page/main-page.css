@@ -256,4 +256,10 @@
 i {
   color: white;
 }
+
+.modal-content .modal-header {
+  font-weight: 900;
+  font-size: 25px;
+  color: #202020;
+}
 /*# sourceMappingURL=main-page.css.map */
