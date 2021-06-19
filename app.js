@@ -14,7 +14,7 @@ const bcrypt = require("bcrypt");
 const { encrypt, decrypt } = require('./crypto');
 
 // Firebase Admin
-const serviceAccountKey = require('./serviceAccountKey.json');
+// const serviceAccountKey = require('./serviceAccountKey.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_CREDS)),
