@@ -110,13 +110,14 @@ function checkCookieMiddleware(req, res, next) {
         .verifySessionCookie(sessionCookie, true)
         .then((decodedClaims) => {
             req.decodedClaims = decodedClaims;
+            console.log(decodedClaims.name);
             // Our request
            next();
         })
         .catch((error) => {
             res.redirect('/login');
             console.log("Unauthorized Request!");
-        })
+        });
 }
 
 // UI Calls
@@ -142,7 +143,7 @@ app.get('/getUsers', checkCookieMiddleware, (req, res) => {
     })
     .catch(err => {
         console.log(err);
-    });;
+    });
 });
 
 app.get('/account/:id', checkCookieMiddleware, (req, res) => {

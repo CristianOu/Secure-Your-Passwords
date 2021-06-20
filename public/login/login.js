@@ -48,7 +48,7 @@ $(document).ready(function() {
     
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-
+    
     $('#login-form').on('submit', function(e){
         e.preventDefault();
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
-                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                            "CSRF-Token": Cookies.get("XSRF-TOKEN")
                         }
                     })
                 });
@@ -85,24 +85,12 @@ $(document).ready(function() {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const username = e.target.username.value;
-        console.log(username);
 
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(({ user }) => {
-                return user.getIdToken(true).then((idToken) => {
-                    return axios.post('/login', {'token': idToken}, {
-                        headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-                        }
-                    })
-                });
-            })
-            .then(() => {
-                firebase.auth().currentUser.updateProfile({
+                user.updateProfile({
                     displayName: username
                 })
             })
@@ -110,10 +98,27 @@ $(document).ready(function() {
                 return firebase.auth().signOut();
             })
             .then(() => {
-                axios.post('/register');
-            })
-            .then(() => {
-                window.location.assign("/");
+                firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(({user}) => {
+                    console.log(user);
+                    return user.getIdToken(true).then((idToken) => {
+                        return axios.post('/login', {'token': idToken}, {
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json",
+                                "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                            }
+                        })
+                    });
+                })
+                .then(() => {
+                    axios.post('/register');
+                })
+                .then(() => {
+                    window.location.assign("/");
+                })
             });
         return false;
     });
