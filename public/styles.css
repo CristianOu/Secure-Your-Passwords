@@ -21,8 +21,8 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 90vw;
-  height: 85vh;
+  width: 95vw;
+  height: 90vh;
   -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
   margin: auto;
@@ -32,12 +32,7 @@ a {
 
 .app-box .content {
   padding: 1.5rem;
-  overflow-y: scroll;
   width: 84%;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 button {
