@@ -85,14 +85,12 @@ $(document).ready(function() {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const username = e.target.username.value;
+        console.log(username);
 
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(({ user }) => {
-                user.updateProfile({
-                    displayName: username
-                });
                 return user.getIdToken(true).then((idToken) => {
                     return axios.post('/login', {'token': idToken}, {
                         headers: {
@@ -102,6 +100,11 @@ $(document).ready(function() {
                         }
                     })
                 });
+            })
+            .then(() => {
+                firebase.auth().currentUser.updateProfile({
+                    displayName: username
+                })
             })
             .then(() => {
                 return firebase.auth().signOut();
