@@ -32,7 +32,12 @@ a {
 
 .app-box .content {
   padding: 1.5rem;
+  overflow-y: scroll;
   width: 84%;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 button {
