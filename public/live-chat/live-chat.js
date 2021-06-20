@@ -35,7 +35,7 @@ const display = (msg, className, user) => {
     const time = new Date().toLocaleTimeString();
     const innerText = `
         <div class="message-title">
-        <span>${user}</span>
+        🐱<span>${user}</span>
         </div>
 
         <div class="message-text">
