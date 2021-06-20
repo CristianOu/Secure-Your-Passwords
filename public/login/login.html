@@ -9,13 +9,22 @@
         <form method="POST" id="login-form">
             <ul>
                 <li class="input">
-                    <input type="email" name="email" placeholder="" class="input-field" required>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="" 
+                        class="input-field" 
+                        required>
                     <label>Email</label>
                     <span class="focus-border"></span>
                 </li>
         
                 <li class="input">
-                    <input type="password" name="password" placeholder="" class="input-field">
+                    <input 
+                        type="password"
+                        name="password" 
+                        placeholder="" 
+                        class="input-field">
                     <label>Password</label>
                     <span class="focus-border"></span>
                 </li>
@@ -33,13 +42,25 @@
         <form method="POST" id="register-form">
             <ul>
                 <li class="input">
-                    <input type="email" name="email" placeholder="" required class="input-field">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="" 
+                        required 
+                        class="input-field">
                     <label>Email</label>
                     <span class="focus-border"></span>
                 </li>
     
                 <li class="input">
-                    <input type="text" name="username" placeholder="" required class="input-field">
+                    <input 
+                        type="text" 
+                        name="username" 
+                        pattern="[^()/><\][^\\\x22,;|$!?!#%&*]+" 
+                        title="No special character allowed!" 
+                        placeholder="" 
+                        required 
+                        class="input-field">
                     <label>Username</label>
                     <span class="focus-border"></span>
                 </li>
