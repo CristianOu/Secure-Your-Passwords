@@ -72,10 +72,11 @@ function copyText(accountId, field) {
     const element = $("#" + accountId + " ." + field + " input");
     const tooltip = $("#" + accountId + " ." + field + " button .tooltip");
 
-    let $temp = $("<input>");
-    $("body").append($temp);
+    const temp = $("<input>");
+    console.log(temp);
+    $("body").append(temp);
 
-    $temp.val(element.val()).select();
+    temp.val(element.val()).select();
     if (document.execCommand("copy")) {
         tooltip.css({"opacity": "1"});
 
@@ -85,5 +86,5 @@ function copyText(accountId, field) {
     } else {
         alert("Something went wrong! Refresh the page!");
     }
-    $temp.remove();
+    temp.remove();
 } 
