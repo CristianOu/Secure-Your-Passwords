@@ -1,0 +1,9 @@
+HOST=localhost
+DATABASE=cooking
+USER=root
+PASSWORD=SZMa98.SvkQ
+
+HOST=foodapp-1.cwz4dw8xewdp.us-east-1.rds.amazonaws.com
+DATABASE=cooking
+USER=root
+PASSWORD=Mediatech1996
